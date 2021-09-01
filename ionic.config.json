@@ -1,0 +1,7 @@
+{
+  "name": "credit-for-life-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
