@@ -1,0 +1,99 @@
+<div class="admin-table">
+  <div class="container-fluid">
+    <form class="needs-validation" [formGroup]="checkpointForm">
+      <div class="form-group">
+        <label for="name">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          placeholder="Title"
+          formControlName="title"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="studentOption">Image URL: </label>
+        <input
+          type="text"
+          class="form-control"
+          id="imageUrl"
+          placeholder="Image URL"
+          formControlName="imageUrl"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="grossAnnualSalary">Description</label>
+        <textarea
+          class="form-control"
+          id="description"
+          placeholder="Description"
+          formControlName="description"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <input id="isStepped" type="checkbox" formControlName="isStepped"/>
+        <label for="isStepped">This checkpoint has steps.</label>
+      </div>
+
+      <div class="form-group">
+        <label for="tfQuestion">True False Question</label>
+        <input
+          class="form-control"
+          id="tfQuestion"
+          placeholder="Question"
+          formControlName="tfQuestion"
+        />
+        <select
+          class="form-control"
+          id="tfAnswer"
+          placeholder="Answer"
+          formControlName="tfAnswer"
+        >
+          <option selected disabled value="">--Please Select Answer--</option>
+          <option value="true">True</option>
+          <option value="false">False</option>
+        </select>
+        <input
+          class="form-control"
+          id="trueStatement"
+          placeholder="Enter true popup text"
+          formControlName="trueStatement"
+        />
+        <input
+          class="form-control"
+          id="falseStatement"
+          placeholder="Enter false popup text"
+          formControlName="falseStatement"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="studentOption">Chat Operators</label>
+        <input
+          type="text"
+          class="form-control"
+          id="chatCode"
+          placeholder="operator1@creditforlife.org,operator2@creditforlife.org"
+          formControlName="chatCode"
+        />
+      </div>
+      <div class="form-group">
+        <label for="studentOption">Video Embed Code</label>
+        <input
+          type="text"
+          class="form-control"
+          id="videoCode"
+          placeholder="Video Embed Code"
+          formControlName="videoCode"
+        />
+      </div>
+
+      <button type="submit" class="btn btn-primary" (click)="addCheckpoint()">
+        {{ submitButtonText }}
+      </button>
+    </form>
+  </div>
+</div>

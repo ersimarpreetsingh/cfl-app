@@ -1,0 +1,231 @@
+
+<section class="porfessions">
+  <div class="container">
+    <div class="food-sec">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="box">
+            <img src="assets/images/profession-icon.png" alt="professions" />
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div class="text">
+            <p>Professions</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="food-menu pro">
+      <div class="row">
+        <div class="col-md-9">
+          <div class="text">
+            <p>
+              Choose a profession that aligns with your interests, strengths,
+              lifestyle goals and salary expectations.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-3 p-md-0">
+          <div class="text side">
+            <h5>Have a question?</h5>
+            <a class="btn" href="#">Email</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="personal-info">
+      <div class="info-head">
+        <h5>PERSONAL INFORMATION</h5>
+      </div>
+      <div class="info-form">
+        <form [formGroup]="profileForm">
+          <div class="form-group upload">
+            <p>Choose an Avatar:</p>
+            <div class="upload-file">
+              <!-- <input type="file" name="file-1[]" id="file-1" class="inputfile inputfile-1" data-multiple-caption="{count} files selected" multiple=""> -->
+              <a href="#" data-toggle="modal" data-target="#choose-avatar">
+                <span>CHOOSE</span></a
+              >
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="fname">First Name:</label>
+            <input type="text" class="form-control" id="fname" formControlName="fname"/>
+          </div>
+          <div class="form-group">
+            <label for="lname">Last Name:</label>
+            <input type="text" class="form-control" id="lname" formControlName="lname"/>
+          </div>
+          <div class="form-group">
+            <label for="email">Username:</label>
+            <input type="text" class="form-control" id="email" formControlName="email" readonly/>
+          </div>
+          <div class="form-group">
+            <label for="occupation">Occupation:</label>
+            <input type="text" class="form-control" id="occupation" formControlName="occupation" readonly placeholder="Please choose from the list given below."/>
+          </div>
+
+          <div class="submit-btn">
+            <button type="submit" class="btn btn-primary" (click)="submitProfile()">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="profession-info">
+      <div class="info-head">
+        <h5>PROFESSIONS</h5>
+      </div>
+      <div class="check-info-list" *ngFor="let category of categories">
+        <p>{{ category.name }}</p>
+        <div class="check-list">
+          <div class="filter">
+            <form>
+              <ul class="row">
+                <li
+                  data-toggle="modal"
+                  [attr.data-target]="'#modal-' + profession._id"
+                  class="col-md-4"
+                  *ngFor="let profession of category.professions"
+                >
+                  <input
+                    class="check-box"
+                    id="{{ profession._id }}"
+                    type="checkbox"
+                    value="professions.value"
+                    [checked]="profession.selected"
+                    (click)="
+                      professionClick($event, category._id, profession._id)
+                    "
+                  />
+                  <label
+                    for="{{ profession._id }}"
+                    (click)="
+                      professionClick($event, category._id, profession._id)
+                    "
+                    >{{ profession.name }}</label
+                  >
+                  <div class="hair-stylist">
+                    <div
+                      class="modal fade"
+                      id="modal-{{ profession._id }}"
+                      tabindex="-1"
+                      role="dialog"
+                      aria-labelledby="title"
+                      aria-hidden="true"
+                    >
+                      <div
+                        class="modal-dialog modal-dialog-centered"
+                        role="document"
+                      >
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="title">
+                              {{ profession.name }}
+                            </h5>
+                            <button
+                              type="button"
+                              class="close"
+                              data-dismiss="modal"
+                              aria-label="Close"
+                            >
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="text">
+                              <div class="salary-head">
+                                <p>SALARY</p>
+                              </div>
+                              <div class="salarys">
+                                <div class="salary-pay">
+                                  <h3>Gross Annual Salary</h3>
+                                  <p>${{ profession.grossAnnualSalary | formatPrice }}</p>
+                                </div>
+                                <div class="salary-pay">
+                                  <h3>Net Pay Yearly</h3>
+                                  <p>${{ profession.netPayYearly | formatPrice }}</p>
+                                </div>
+                                <div class="salary-pay">
+                                  <h3>Net Pay Monthly</h3>
+                                  <p>${{ profession.netPayMonthly | formatPrice}}</p>
+                                </div>
+                              </div>
+
+                              <!-- <div class="education">
+                                <div class="salary-head">
+                                  <p>EDUCATION</p>
+                                </div>
+                                <div class="salary-pay">
+                                  <h3>
+                                    Bachelor’s Degree <br /><span
+                                      >Monthly loan payments</span
+                                    >
+                                  </h3>
+                                  <p>$333.00</p>
+                                </div>
+                              </div> -->
+                              <div class="pop-btn">
+                                <a (click)="submitProfession()">Select as Occupation</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="hair-stylist">
+  <div
+    class="modal fade"
+    id="choose-avatar"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="title"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="title">Choose an Avatar</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="text">
+            <ul>
+              <li
+                *ngFor="let avatar of avatars"
+                data-dismiss="modal"
+                [ngClass]="{ selected: avatar.selected }"
+                (click)="selectAvatar(avatar.id)"
+              >
+                <a>
+                  <img src="{{ avatar.imageUrl }}" alt="avatar" />
+                </a>
+              </li>
+            </ul>
+
+            <div class="pop-btn">
+              <a href="#">Select Avatar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

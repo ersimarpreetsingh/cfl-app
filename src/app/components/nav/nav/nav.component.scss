@@ -1,0 +1,61 @@
+.navbar-nav {
+  li {
+    &:nth-child(3) {
+      border-bottom: 1px solid #c0fdfb;
+      @media (min-width: 1200px) {
+        border-right: 1px solid #c0fdfb;
+        border-bottom: 0px;
+      }
+    }
+  }
+}
+.budget-pop-up {
+  .modal {
+    .modal-dialog {
+      .modal-content {
+        .modal-body {
+          .text {
+            @media (min-width: 768px) {
+              padding: 40px 20px;
+            }
+            .budget-sheet-btn {
+              .budget-btn {
+                a {
+                  cursor: pointer;
+                  font-size: 18px;
+                  height: 100%;
+                  padding: 10px;
+                  width: 100%;
+                }
+              }
+            }
+            &.pay-credit {
+              input {
+                background: #e6e6e6;
+                border: 0 none;
+                border-radius: 6px;
+                font: 20px "Poppins";
+                height: 48px;
+                padding: 10px;
+                outline: 0 none;
+                width: 100%;
+              }
+              .cta {
+                font: bold 20px "Poppins";
+                color: #fff;
+                border: 0;
+                padding: 15px 25px;
+                text-transform: uppercase;
+                background: #f35b04;
+                margin: 0 10px;
+                &.blue {
+                  background-color: #006ba6;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

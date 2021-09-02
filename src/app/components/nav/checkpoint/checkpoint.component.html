@@ -1,0 +1,1729 @@
+<section class="food-nutrition">
+  <div class="container" *ngIf="checkpoint">
+    <div class="food-sec">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="box">
+            <img src="{{ checkpoint?.imageUrl }}" alt="service" />
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div class="text">
+            <p>{{ checkpoint?.title }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="food-menu">
+      <div class="row">
+        <div class="col-md-9">
+          <div class="text">
+            <p
+              *ngIf="checkpoint?.description"
+              [innerHtml]="checkpoint?.description"
+            ></p>
+          </div>
+        </div>
+        <div class="col-md-3 p-md-0">
+          <div class="text side">
+            <h5>Have a question?</h5>
+            <!-- <p>Help is just a click away.</p> -->
+            <a class="btn" (click)="openChat()">CHAT</a>
+          </div>
+          <div class="text side video">
+            <h5>FINANCIAL VIDEOS</h5>
+            <!-- <a class="btn" data-toggle="modal" data-target="#videoModal"><img src="assets/images/video.png"
+                alt="video" /> MONEY MODULES
+            </a> -->
+            <a class="btn" routerLink="/nav/money-modules"
+              ><img src="assets/images/video.png" alt="video" /> MONEY MODULES
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <section class="tabs-cfl" *ngIf="checkpoint && checkpoint?.isStepped">
+      <nav>
+        <div class="nav nav-tabs nav-fill cfl-tabs" id="nav-tab" role="tablist">
+          <a
+            *ngFor="let tab of checkpoint?.packages; let i = index"
+            class="nav-item nav-link"
+            [ngClass]="{ active: i == 0 }"
+            id="{{ tab._id }}-tab"
+            data-toggle="tab"
+            href="#{{ tab._id }}"
+            role="tab"
+            [attr.aria-controls]="tab._id"
+            [attr.aria-selected]="i == 0"
+            (click)="changeTab(tab._id + '')"
+            >{{ tab.title }}</a
+          >
+        </div>
+      </nav>
+      <div class="tab-content" id="nav-tabContent">
+        <div
+          *ngFor="let tab of checkpoint?.packages; let i = index"
+          class="tab-pane fade"
+          [ngClass]="{ show: i == 0, active: i == 0 }"
+          id="{{ tab._id }}"
+          role="tabpanel"
+          [attr.aria-labelledby]="tab._id + '-tab'"
+        >
+          <ng-container *ngFor="let pack of tab?.subPackages; let i = index">
+            <div class="health" *ngIf="checkpoint.title === 'Health & Fitness'">
+              <p>{{ pack.title }}</p>
+            </div>
+            <div
+              class="food-menu yellow life-style"
+              [ngClass]="{ gray: i % 2 !== 0, 'health-box': pack.moreInfo }"
+            >
+              <div
+                class="row align-items-center"
+                *ngIf="!pack.subPackages || pack.subPackages.length < 1"
+              >
+                <div
+                  [ngClass]="{
+                    'col-md-8': pack.moreInfo,
+                    'col-md-9': !pack.moreInfo
+                  }"
+                >
+                  <div
+                    class="text"
+                    *ngIf="!(checkpoint.title === 'Health & Fitness')"
+                  >
+                    <h4>{{ pack.title }}</h4>
+                    <p
+                      *ngIf="pack.description"
+                      [innerHtml]="pack.description"
+                    ></p>
+                  </div>
+                </div>
+                <div class="col-md-3 p-md-0">
+                  <div class="text side" style="text-align: center">
+                    <div class="price">
+                      <p>${{ pack | checkpointPrice }}</p>
+                    </div>
+                    <a
+                      *ngIf="!pack.debitFrom"
+                      class="btn"
+                      data-toggle="modal"
+                      attr.data-target="#account{{ pack._id }}"
+                      [ngClass]="{ disabled: isPackDisabled(pack) }"
+                      [ngStyle]="{
+                        pointerEvents: isPackDisabled(pack) ? 'none' : 'auto'
+                      }"
+                      >SELECT</a
+                    >
+                    <a
+                      *ngIf="pack.debitFrom"
+                      class="btn"
+                      (click)="transaction(pack)"
+                      [ngClass]="{ disabled: isPackDisabled(pack) }"
+                      [ngStyle]="{
+                        pointerEvents: isPackDisabled(pack) ? 'none' : 'auto'
+                      }"
+                      >SELECT</a
+                    >
+                  </div>
+                </div>
+                <div class="col-md-1" *ngIf="pack.moreInfo">
+                  <div class="text side">
+                    <div
+                      class="question-sec"
+                      data-toggle="modal"
+                      attr.data-target="#pro-modal{{ pack._id }}"
+                    >
+                      <i class="fas fa-question"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <ng-container
+                *ngIf="pack.subPackages && pack.subPackages.length > 0"
+              >
+                <div
+                  class="row"
+                  *ngIf="!(checkpoint.title === 'Health & Fitness')"
+                >
+                  <div class="col-md-12">
+                    <div class="text">
+                      <h4 class="m-0" *ngIf="pack.title">{{ pack.title }}</h4>
+                      <p
+                        *ngIf="pack.description"
+                        [innerHtml]="pack.description"
+                      ></p>
+                      <p>&nbsp;</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div
+                    class="
+                      col-md-4
+                      mb-5
+                      text
+                      blue
+                      text-center
+                      d-flex
+                      flex-column
+                      justify-content-between
+                      position-relative
+                    "
+                    *ngFor="let subPack of pack.subPackages"
+                  >
+                    <div class="meta mb-4">
+                      <h5 *ngIf="subPack.title">{{ subPack.title }}</h5>
+                      <p
+                        class="height"
+                        *ngIf="subPack.description"
+                        [innerHtml]="subPack.description"
+                      ></p>
+                    </div>
+                    <div
+                      class="
+                        price
+                        d-flex
+                        flex-column flex-grow-1
+                        justify-content-end
+                      "
+                    >
+                      <p>${{ subPack | checkpointPrice }}</p>
+                      <a
+                        *ngIf="!subPack.debitFrom"
+                        class="btn"
+                        data-toggle="modal"
+                        attr.data-target="#account{{ subPack._id }}"
+                        [ngClass]="{
+                          disabled: isPackDisabled(subPack)
+                        }"
+                        [ngStyle]="{
+                          pointerEvents: isPackDisabled(subPack)
+                            ? 'none'
+                            : 'auto'
+                        }"
+                        >SELECT</a
+                      >
+                      <a
+                        *ngIf="subPack.debitFrom"
+                        class="btn"
+                        (click)="transaction(subPack)"
+                        [ngClass]="{
+                          disabled: isPackDisabled(subPack)
+                        }"
+                        [ngStyle]="{
+                          pointerEvents: isPackDisabled(pack) ? 'none' : 'auto'
+                        }"
+                        >SELECT</a
+                      >
+                    </div>
+                    <div
+                      *ngIf="subPack.moreInfo"
+                      class="text side position-absolute"
+                      style="top: 0px; right: 0px"
+                    >
+                      <div
+                        class="question-sec"
+                        data-toggle="modal"
+                        attr.data-target="#pro-modal{{ subPack._id }}"
+                      >
+                        <i class="fas fa-question"></i>
+                      </div>
+                    </div>
+                    <div
+                      *ngIf="pack.title === 'Retirement Savings'"
+                      class="text side position-absolute"
+                      style="top: 0px; right: 0px"
+                    >
+                      <div
+                        class="question-sec"
+                        data-toggle="modal"
+                        attr.data-target="#calc{{ subPack._id }}"
+                      >
+                        <i class="fas fa-question"></i>
+                      </div>
+                    </div>
+                    <div
+                      class="account-modal"
+                      *ngIf="pack.subPackages && pack.subPackages.length > 0"
+                    >
+                      <div
+                        class="modal fade show"
+                        id="account{{ subPack._id }}"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="title"
+                        aria-hidden="true"
+                      >
+                        <div
+                          class="modal-dialog modal-dialog-centered"
+                          role="document"
+                        >
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="title">
+                                PICK AN ACCOUNT
+                              </h5>
+                              <button
+                                type="button"
+                                class="close"
+                                data-dismiss="modal"
+                                aria-label="Close"
+                              >
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="text">
+                                <div class="account-text">
+                                  <h3>
+                                    Choose which account to use to pay for this
+                                    service
+                                  </h3>
+                                  <ul class="row">
+                                    <li class="col-md-4">
+                                      <a
+                                        *ngIf="subPack._id"
+                                        (click)="transaction(subPack, 'CA')"
+                                        data-dismiss="modal"
+                                        >DEBIT</a
+                                      >
+                                    </li>
+                                    <li class="col-md-4">
+                                      <a
+                                        *ngIf="subPack._id"
+                                        (click)="transaction(subPack, 'SA')"
+                                        class="blue"
+                                        data-dismiss="modal"
+                                        >SAVINGS</a
+                                      >
+                                    </li>
+                                    <li class="col-md-4">
+                                      <a
+                                        *ngIf="subPack._id"
+                                        (click)="transaction(subPack, 'CC')"
+                                        class="frozen"
+                                        data-dismiss="modal"
+                                        >CREDIT CARD</a
+                                      >
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="hmo-modal"
+                      *ngIf="pack.subPackages && pack.subPackages.length > 0"
+                    >
+                      <div
+                        class="modal fade"
+                        id="pro-modal{{ subPack._id }}"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="title"
+                        aria-hidden="true"
+                      >
+                        <div
+                          class="modal-dialog modal-dialog-centered"
+                          role="document"
+                        >
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="title">
+                                {{ subPack.title }}
+                                <span
+                                  >${{ subPack | checkpointPrice }}/month</span
+                                >
+                              </h5>
+                              <button
+                                type="button"
+                                class="close"
+                                data-dismiss="modal"
+                                aria-label="Close"
+                              >
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <div
+                                class="text"
+                                [innerHtml]="subPack.moreInfo"
+                              ></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="calculator-modal second">
+                      <div
+                        class="modal fade"
+                        id="calc{{ subPack._id }}"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="title"
+                        aria-hidden="true"
+                      >
+                        <div
+                          class="modal-dialog modal-dialog-centered"
+                          role="document"
+                        >
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="title">
+                                Calculator — {{ subPack?.price }}%
+                              </h5>
+                              <button
+                                type="button"
+                                class="close"
+                                data-dismiss="modal"
+                                aria-label="Close"
+                              >
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="text">
+                                <form>
+                                  <div class="form-group row">
+                                    <label
+                                      for="staticEmail"
+                                      class="text-left col-sm-7 col-form-label"
+                                      >Gross Annual Salary</label
+                                    >
+                                    <div
+                                      class="col-sm-5 pl-md-0"
+                                      *ngIf="user && user.profession"
+                                    >
+                                      <div class="annual_salary">
+                                        <p>
+                                          ${{
+                                            user?.profession.grossAnnualSalary
+                                              | formatPrice
+                                          }}
+                                        </p>
+                                      </div>
+                                      <!-- <input type="text" name="grossAnnualSalary" class="form-control-plaintext" [(ngModel)]="user?.profession.grossAnnualSalary"> -->
+                                    </div>
+                                  </div>
+                                </form>
+                                <div class="cost-sec">
+                                  <p>
+                                    Monthly Cost:
+                                    <span
+                                      >${{
+                                        (user?.profession?.grossAnnualSalary /
+                                          12) *
+                                          (subPack.price / 100) | formatPrice
+                                      }}</span
+                                    >
+                                  </p>
+                                  <p>
+                                    Total Investment at age 65:
+                                    <span
+                                      >${{
+                                        user?.profession?.grossAnnualSalary *
+                                          (subPack.price / 100) *
+                                          40 | formatPrice
+                                      }}</span
+                                    >
+                                  </p>
+                                  <p>
+                                    Total Interest Earned:
+                                    <span
+                                      >${{
+                                        calcAccBalance(subPack.price) -
+                                          user?.profession?.grossAnnualSalary *
+                                            (subPack.price / 100) *
+                                            40 | formatPrice
+                                      }}</span
+                                    >
+                                  </p>
+                                  <p>
+                                    Account Balance at Age 65:
+                                    <span
+                                      >${{
+                                        calcAccBalance(subPack.price)
+                                          | formatPrice
+                                      }}</span
+                                    >
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+
+              <div
+                class="account-modal"
+                *ngIf="!pack.subPackages || pack.subPackages.length < 1"
+              >
+                <div
+                  class="modal fade show"
+                  id="account{{ pack._id }}"
+                  tabindex="-1"
+                  role="dialog"
+                  aria-labelledby="title"
+                  aria-hidden="true"
+                >
+                  <div
+                    class="modal-dialog modal-dialog-centered"
+                    role="document"
+                  >
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="title">PICK AN ACCOUNT</h5>
+                        <button
+                          type="button"
+                          class="close"
+                          data-dismiss="modal"
+                          aria-label="Close"
+                        >
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="text">
+                          <div class="account-text">
+                            <h3>
+                              Choose which account to use to pay for this
+                              service
+                            </h3>
+                            <ul class="row">
+                              <li class="col-md-4">
+                                <a
+                                  *ngIf="pack._id"
+                                  (click)="transaction(pack, 'CA')"
+                                  data-dismiss="modal"
+                                  >DEBIT</a
+                                >
+                              </li>
+                              <li class="col-md-4">
+                                <a
+                                  *ngIf="pack._id"
+                                  (click)="transaction(pack, 'SA')"
+                                  class="blue"
+                                  data-dismiss="modal"
+                                  >SAVINGS</a
+                                >
+                              </li>
+                              <li class="col-md-4">
+                                <a
+                                  *ngIf="pack._id"
+                                  (click)="transaction(pack, 'CC')"
+                                  class="frozen"
+                                  data-dismiss="modal"
+                                  >CREDIT CARD</a
+                                >
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="hmo-modal"
+                *ngIf="!pack.subPackages || pack.subPackages.length < 1"
+              >
+                <div
+                  class="modal fade"
+                  id="pro-modal{{ pack._id }}"
+                  tabindex="-1"
+                  role="dialog"
+                  aria-labelledby="title"
+                  aria-hidden="true"
+                >
+                  <div
+                    class="modal-dialog modal-dialog-centered"
+                    role="document"
+                  >
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="title">
+                          {{ pack.title }}
+                          <span>${{ pack | checkpointPrice }}/month</span>
+                        </h5>
+                        <button
+                          type="button"
+                          class="close"
+                          data-dismiss="modal"
+                          aria-label="Close"
+                        >
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="text" [innerHtml]="pack.moreInfo"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <div
+            class="
+              align-items-center
+              click-cta
+              d-flex
+              justify-content-center
+              text-uppercase
+              my-3
+            "
+          >
+            <span
+              class="align-items-center d-flex justify-content-center prev tab"
+              (click)="changeTab(i > 0 ? checkpoint.packages[i-1]._id + '' : checkpoint.packages[0]._id + '')"
+              ><i class="fas fa-chevron-left mr-2"></i> Previous</span
+            >
+            <span
+              class="align-items-center d-flex justify-content-center next tab"
+              (click)="changeTab(i < checkpoint.packages.length - 1 ? checkpoint.packages[i+1]._id + '' : checkpoint.packages[i]._id + '')"
+              >next <i class="fas fa-chevron-right ml-2"></i
+            ></span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- <div class="food-menu yellow life-style" *ngIf="checkpoint.packages?.subPackages?.length" >
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text">
+                        <h4>Monthly Savings</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-6 mb-5">
+                            <div class="text text-center line blue">
+                                <h5>Option #1</h5>
+                                <p><b> Monthly to Savings <br> Account </b></p>
+                                <div class="price">
+                                    <p>$50</p>
+                                    <a class="btn" href="#">SELECT</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-5">
+                            <div class="text text-center line blue">
+                                <h5>Option #2</h5>
+                                <p><b>Monthly to Savings <br> Account</b></p>
+                                <div class="price">
+                                    <p>$100</p>
+                                    <a class="btn" href="#">SELECT</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+        </div> -->
+    <ng-container *ngIf="!checkpoint?.isStepped">
+      <ng-container *ngFor="let pack of checkpoint?.packages; let i = index">
+        <div class="health" *ngIf="checkpoint.title === 'Health & Fitness'">
+          <p>{{ pack.title }}</p>
+        </div>
+        <div
+          class="food-menu yellow life-style"
+          [ngClass]="{ gray: i % 2 !== 0, 'health-box': pack.moreInfo }"
+        >
+          <div
+            class="row align-items-center"
+            *ngIf="!pack.subPackages || pack.subPackages.length < 1"
+          >
+            <div
+              [ngClass]="{
+                'col-md-8': pack.moreInfo,
+                'col-md-9': !pack.moreInfo
+              }"
+            >
+              <div
+                class="text"
+                *ngIf="!(checkpoint.title === 'Health & Fitness')"
+              >
+                <h4>{{ pack.title }}</h4>
+                <p *ngIf="pack.description" [innerHtml]="pack.description"></p>
+              </div>
+            </div>
+            <div class="col-md-3 p-md-0">
+              <div class="text side" style="text-align: center">
+                <div class="price">
+                  <p>${{ pack | checkpointPrice }}</p>
+                </div>
+                <a
+                  *ngIf="!pack.debitFrom"
+                  class="btn"
+                  data-toggle="modal"
+                  attr.data-target="#account{{ pack._id }}"
+                  [ngClass]="{ disabled: isPackDisabled(pack) }"
+                  [ngStyle]="{
+                    pointerEvents: isPackDisabled(pack) ? 'none' : 'auto'
+                  }"
+                  >SELECT</a
+                >
+                <a
+                  *ngIf="pack.debitFrom"
+                  class="btn"
+                  (click)="transaction(pack)"
+                  [ngClass]="{ disabled: isPackDisabled(pack) }"
+                  [ngStyle]="{
+                    pointerEvents: isPackDisabled(pack) ? 'none' : 'auto'
+                  }"
+                  >SELECT</a
+                >
+              </div>
+            </div>
+            <div class="col-md-1" *ngIf="pack.moreInfo">
+              <div class="text side">
+                <div
+                  class="question-sec"
+                  data-toggle="modal"
+                  attr.data-target="#pro-modal{{ pack._id }}"
+                >
+                  <i class="fas fa-question"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ng-container *ngIf="pack.subPackages && pack.subPackages.length > 0">
+            <div class="row" *ngIf="!(checkpoint.title === 'Health & Fitness')">
+              <div class="col-md-12">
+                <div class="text">
+                  <h4 class="m-0" *ngIf="pack.title">{{ pack.title }}</h4>
+                  <p
+                    *ngIf="pack.description"
+                    [innerHtml]="pack.description"
+                  ></p>
+                  <p>&nbsp;</p>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div
+                class="
+                  col-md-4
+                  mb-5
+                  text
+                  blue
+                  text-center
+                  d-flex
+                  flex-column
+                  justify-content-between
+                  position-relative
+                "
+                *ngFor="let subPack of pack.subPackages"
+              >
+                <div class="meta mb-4">
+                  <h5 *ngIf="subPack.title">{{ subPack.title }}</h5>
+                  <p
+                    class="height"
+                    *ngIf="subPack.description"
+                    [innerHtml]="subPack.description"
+                  ></p>
+                </div>
+                <div
+                  class="
+                    price
+                    d-flex
+                    flex-column flex-grow-1
+                    justify-content-end
+                  "
+                >
+                  <p>${{ subPack | checkpointPrice }}</p>
+                  <a
+                    *ngIf="!subPack.debitFrom"
+                    class="btn"
+                    data-toggle="modal"
+                    attr.data-target="#account{{ subPack._id }}"
+                    [ngClass]="{
+                      disabled: isPackDisabled(subPack)
+                    }"
+                    [ngStyle]="{
+                      pointerEvents: isPackDisabled(subPack) ? 'none' : 'auto'
+                    }"
+                    >SELECT</a
+                  >
+                  <a
+                    *ngIf="subPack.debitFrom"
+                    class="btn"
+                    (click)="transaction(subPack)"
+                    [ngClass]="{
+                      disabled: isPackDisabled(subPack)
+                    }"
+                    [ngStyle]="{
+                      pointerEvents: isPackDisabled(pack) ? 'none' : 'auto'
+                    }"
+                    >SELECT</a
+                  >
+                </div>
+                <div
+                  *ngIf="subPack.moreInfo"
+                  class="text side position-absolute"
+                  style="top: 0px; right: 0px"
+                >
+                  <div
+                    class="question-sec"
+                    data-toggle="modal"
+                    attr.data-target="#pro-modal{{ subPack._id }}"
+                  >
+                    <i class="fas fa-question"></i>
+                  </div>
+                </div>
+                <div
+                  *ngIf="pack.title === 'Retirement Savings'"
+                  class="text side position-absolute"
+                  style="top: 0px; right: 0px"
+                >
+                  <div
+                    class="question-sec"
+                    data-toggle="modal"
+                    attr.data-target="#calc{{ subPack._id }}"
+                  >
+                    <i class="fas fa-question"></i>
+                  </div>
+                </div>
+                <div
+                  class="account-modal"
+                  *ngIf="pack.subPackages && pack.subPackages.length > 0"
+                >
+                  <div
+                    class="modal fade show"
+                    id="account{{ subPack._id }}"
+                    tabindex="-1"
+                    role="dialog"
+                    aria-labelledby="title"
+                    aria-hidden="true"
+                  >
+                    <div
+                      class="modal-dialog modal-dialog-centered"
+                      role="document"
+                    >
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="title">
+                            PICK AN ACCOUNT
+                          </h5>
+                          <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                          >
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="text">
+                            <div class="account-text">
+                              <h3>
+                                Choose which account to use to pay for this
+                                service
+                              </h3>
+                              <ul class="row">
+                                <li class="col-md-4">
+                                  <a
+                                    *ngIf="subPack._id"
+                                    (click)="transaction(subPack, 'CA')"
+                                    data-dismiss="modal"
+                                    >DEBIT</a
+                                  >
+                                </li>
+                                <li class="col-md-4">
+                                  <a
+                                    *ngIf="subPack._id"
+                                    (click)="transaction(subPack, 'SA')"
+                                    class="blue"
+                                    data-dismiss="modal"
+                                    >SAVINGS</a
+                                  >
+                                </li>
+                                <li class="col-md-4">
+                                  <a
+                                    *ngIf="subPack._id"
+                                    (click)="transaction(subPack, 'CC')"
+                                    class="frozen"
+                                    data-dismiss="modal"
+                                    >CREDIT CARD</a
+                                  >
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="hmo-modal"
+                  *ngIf="pack.subPackages && pack.subPackages.length > 0"
+                >
+                  <div
+                    class="modal fade"
+                    id="pro-modal{{ subPack._id }}"
+                    tabindex="-1"
+                    role="dialog"
+                    aria-labelledby="title"
+                    aria-hidden="true"
+                  >
+                    <div
+                      class="modal-dialog modal-dialog-centered"
+                      role="document"
+                    >
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="title">
+                            {{ subPack.title }}
+                            <span>${{ subPack | checkpointPrice }}/month</span>
+                          </h5>
+                          <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                          >
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <div
+                            class="text"
+                            [innerHtml]="subPack.moreInfo"
+                          ></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="calculator-modal second">
+                  <div
+                    class="modal fade"
+                    id="calc{{ subPack._id }}"
+                    tabindex="-1"
+                    role="dialog"
+                    aria-labelledby="title"
+                    aria-hidden="true"
+                  >
+                    <div
+                      class="modal-dialog modal-dialog-centered"
+                      role="document"
+                    >
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="title">
+                            Calculator — {{ subPack?.price }}%
+                          </h5>
+                          <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                          >
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="text">
+                            <form>
+                              <div class="form-group row">
+                                <label
+                                  for="staticEmail"
+                                  class="text-left col-sm-7 col-form-label"
+                                  >Gross Annual Salary</label
+                                >
+                                <div
+                                  class="col-sm-5 pl-md-0"
+                                  *ngIf="user && user.profession"
+                                >
+                                  <div class="annual_salary">
+                                    <p>
+                                      ${{
+                                        user?.profession.grossAnnualSalary
+                                          | formatPrice
+                                      }}
+                                    </p>
+                                  </div>
+                                  <!-- <input type="text" name="grossAnnualSalary" class="form-control-plaintext" [(ngModel)]="user?.profession.grossAnnualSalary"> -->
+                                </div>
+                              </div>
+                            </form>
+                            <div class="cost-sec">
+                              <p>
+                                Monthly Cost:
+                                <span
+                                  >${{
+                                    (user?.profession?.grossAnnualSalary / 12) *
+                                      (subPack.price / 100) | formatPrice
+                                  }}</span
+                                >
+                              </p>
+                              <p>
+                                Total Investment at age 65:
+                                <span
+                                  >${{
+                                    user?.profession?.grossAnnualSalary *
+                                      (subPack.price / 100) *
+                                      40 | formatPrice
+                                  }}</span
+                                >
+                              </p>
+                              <p>
+                                Total Interest Earned:
+                                <span
+                                  >${{
+                                    calcAccBalance(subPack.price) -
+                                      user?.profession?.grossAnnualSalary *
+                                        (subPack.price / 100) *
+                                        40 | formatPrice
+                                  }}</span
+                                >
+                              </p>
+                              <p>
+                                Account Balance at Age 65:
+                                <span
+                                  >${{
+                                    calcAccBalance(subPack.price) | formatPrice
+                                  }}</span
+                                >
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
+          <div
+            class="account-modal"
+            *ngIf="!pack.subPackages || pack.subPackages.length < 1"
+          >
+            <div
+              class="modal fade show"
+              id="account{{ pack._id }}"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="title"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="title">PICK AN ACCOUNT</h5>
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="text">
+                      <div class="account-text">
+                        <h3>
+                          Choose which account to use to pay for this service
+                        </h3>
+                        <ul class="row">
+                          <li class="col-md-4">
+                            <a
+                              *ngIf="pack._id"
+                              (click)="transaction(pack, 'CA')"
+                              data-dismiss="modal"
+                              >DEBIT</a
+                            >
+                          </li>
+                          <li class="col-md-4">
+                            <a
+                              *ngIf="pack._id"
+                              (click)="transaction(pack, 'SA')"
+                              class="blue"
+                              data-dismiss="modal"
+                              >SAVINGS</a
+                            >
+                          </li>
+                          <li class="col-md-4">
+                            <a
+                              *ngIf="pack._id"
+                              (click)="transaction(pack, 'CC')"
+                              class="frozen"
+                              data-dismiss="modal"
+                              >CREDIT CARD</a
+                            >
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="hmo-modal"
+            *ngIf="!pack.subPackages || pack.subPackages.length < 1"
+          >
+            <div
+              class="modal fade"
+              id="pro-modal{{ pack._id }}"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="title"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="title">
+                      {{ pack.title }}
+                      <span>${{ pack | checkpointPrice }}/month</span>
+                    </h5>
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="text" [innerHtml]="pack.moreInfo"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+    <!-- <div class="food-menu yellow gray">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="text">
+                        <h4>Food Pantry</h4>
+                        <p>The local food pantry is collecting money to restock its shelves. To donate, please support them with $10.</p>
+                    </div>
+                </div>
+                <div class="col-md-3 p-md-0">
+                    <div class="text side">
+                        <div class="price">
+                            <p>$10</p>
+                        </div>
+                        <a class="btn" href="#">SELECT</a>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+    <div class="account-modal">
+      <div
+        class="modal fade show"
+        id="videoModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="title"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="title">HERE'S A VIDEO</h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div
+              class="modal-body d-flex justify-content-center"
+              [innerHtml]="checkpoint.videoCode"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="grant-money" *ngIf="checkpoint?.title === 'Education & Training'">
+  <div class="container">
+    <a
+      data-toggle="modal"
+      data-target="#grantmoney"
+      (click)="applyGrant()"
+      [ngClass]="{ disabled: grantDisabled }"
+      [ngStyle]="{
+        pointerEvents: grantDisabled ? 'none' : 'auto'
+      }"
+      >APPLY FOR GRANT MONEY</a
+    >
+  </div>
+</div>
+<div
+  [ngClass]="{
+    'truefalse-modal': userAnswer !== true && userAnswer !== false,
+    'correct-modal': userAnswer === false || userAnswer === true
+  }"
+>
+  <div
+    class="modal fade"
+    [ngClass]="{ show: checkpoint?.trueFalseQuestion?.question && !answered }"
+    [ngStyle]="{
+      display:
+        checkpoint?.trueFalseQuestion?.question && !answered ? 'block' : 'none'
+    }"
+    id="truefalse"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="title"
+    aria-hidden="true"
+    style="display: block; padding-right: 17px"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div
+          class="modal-header"
+          *ngIf="userAnswer !== true && userAnswer !== false"
+        >
+          <h5 class="modal-title" id="title">True or False?</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div
+          class="modal-header"
+          *ngIf="userAnswer === false || userAnswer === true"
+        >
+          <h5 class="modal-title" id="title" *ngIf="isCorrect">
+            <img src="assets/images/check-mark.png" alt="check" /> CORRECT!
+          </h5>
+          <h5 class="modal-title" id="title" *ngIf="!isCorrect">
+            <img src="assets/images/x.png" alt="check" /> INCORRECT!
+          </h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+            (click)="markAnswered()"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="text">
+            <div class="truefalse-circle">
+              <div
+                class="circle"
+                *ngIf="userAnswer !== true && userAnswer !== false"
+              >
+                <p class="true" (click)="answerTrueFalse(true)">T</p>
+                <p class="false" (click)="answerTrueFalse(false)">F</p>
+              </div>
+              <div
+                class="circle"
+                *ngIf="userAnswer === false || userAnswer === true"
+              >
+                <p class="true">T</p>
+                <p class="false">F</p>
+              </div>
+            </div>
+            <div class="truefalse-text">
+              <p *ngIf="userAnswer !== true && userAnswer !== false">
+                {{ checkpoint?.trueFalseQuestion?.question }}
+              </p>
+              <p
+                *ngIf="(userAnswer == true || userAnswer == false) && isCorrect"
+              >
+                {{ checkpoint?.trueFalseQuestion?.trueStatement }}
+              </p>
+              <p
+                *ngIf="
+                  (userAnswer == true || userAnswer == false) && !isCorrect
+                "
+              >
+                {{ checkpoint?.trueFalseQuestion?.falseStatement }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="life-happens-modal">
+  <div
+    class="modal fade show"
+    id="creditscore"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="title"
+    aria-hidden="true"
+    [ngStyle]="{
+      display:
+        hasLifehappend && answered && lifeEvent?.type === 'good'
+          ? 'block'
+          : 'none'
+    }"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="food-sec">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="box">
+                  <img src="assets/images/info-icon.png" alt="fun" />
+                </div>
+              </div>
+              <div class="col-md-9">
+                <div class="text">
+                  <h4>Life Happens!</h4>
+                  <p>
+                    The only predictable part of life is its lack of
+                    predictability! Here you may find a pleasant surprise!
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+            (click)="lifeHappen()"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body animated animatedFadeInUp fadeInUp">
+          <div class="text">
+            <div class="identity-image">
+              <img
+                src="assets/images/sun_sea_accidents.png"
+                alt="Identitytheft"
+              />
+              <div class="text-inner">
+                <h2>
+                  {{ lifeEvent?.title }}
+                </h2>
+                <p>
+                  {{ lifeEvent?.description }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="modal fade show"
+    id="creditscore"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="title"
+    aria-hidden="true"
+    [ngStyle]="{
+      display:
+        hasLifehappend && answered && lifeEvent?.type === 'bad'
+          ? 'block'
+          : 'none'
+    }"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="food-sec">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="box">
+                  <img src="assets/images/info-icon.png" alt="fun" />
+                </div>
+              </div>
+              <div class="col-md-9">
+                <div class="text">
+                  <h4></h4>
+                  <p>
+                    The only predictable part of life is its lack of
+                    predictability! Here, you may find that something less than
+                    ideal has occurred!
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+            (click)="lifeHappen()"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body animated animatedFadeInUp fadeInUp">
+          <div class="text">
+            <div class="identity-image">
+              <img
+                src="assets/images/explosion_identitytheft.png"
+                alt="Identitytheft"
+              />
+              <div class="text-inner">
+                <h2>{{ lifeEvent?.title }}</h2>
+                <p>
+                  {{ lifeEvent?.description }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-open">
+  <div class="credit-score-one-modal">
+    <div
+      class="modal fade show"
+      id="creditscore1"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="title"
+      aria-hidden="true"
+      [ngStyle]="{ display: creditScorePopup ? 'block' : 'none' }"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4>WANT TO INCREASE YOUR CREDIT SCORE BY</h4>
+            <h5 class="modal-title" id="title">50 POINTS?</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+              (click)="creditScorePopup = false"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="text">
+              <form [formGroup]="creditForm">
+                <p class="text-center">
+                  Answer any <b>3</b> of these questions correctly
+                </p>
+                <div class="check-info-list">
+                  <p>
+                    <span>1.</span> You’re applying for a brand new job. Can the
+                    employer check your credit report?
+                  </p>
+                  <div class="check-list">
+                    <div class="filter">
+                      <div class="row">
+                        <div class="col-md-2">
+                          <ul>
+                            <li>
+                              <input
+                                class="check-box yes"
+                                id="y1"
+                                type="radio"
+                                value="yes"
+                                name="q1"
+                                formControlName="q1"
+                              />
+                              <label for="y1">YES</label>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="col-md-2">
+                          <ul>
+                            <li>
+                              <input
+                                class="check-box no"
+                                id="y2"
+                                type="radio"
+                                value="no"
+                                name="q1"
+                                formControlName="q1"
+                              />
+                              <label for="y2">NO</label>
+                            </li>
+                          </ul>
+                        </div>
+                        <!-- <div class="col-md-12">
+                          <div class="text-show">
+                            <div class="show-data">
+                              <p>
+                                Yes, they can obtain a modified version of your
+                                credit report called an “employment report”
+                                through one of the 3 major credit reporting
+                                agencies. It includes information about your
+                                credit history and other money habits. If you
+                                are not reliable in paying your bills, they may
+                                question if you will be a reliable employee.
+                              </p>
+                            </div>
+                          </div>
+                        </div> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="check-info-list">
+                  <p>
+                    <span>2.</span>You’re searching for a new apartment. Can
+                    your credit report be checked by the Realtor?
+                  </p>
+                  <div class="check-list">
+                    <div class="filter">
+                      <div class="row">
+                        <div class="col-md-2">
+                          <ul>
+                            <li>
+                              <input
+                                class="check-box yes"
+                                id="y3"
+                                type="radio"
+                                value="yes"
+                                name="q2"
+                                formControlName="q2"
+                              />
+                              <label for="y3">YES</label>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="col-md-2">
+                          <ul>
+                            <li>
+                              <input
+                                class="check-box no"
+                                id="y4"
+                                type="radio"
+                                value="no"
+                                name="q2"
+                                formControlName="q2"
+                              />
+                              <label for="y4">NO</label>
+                            </li>
+                          </ul>
+                        </div>
+                        <!-- <div class="col-md-12">
+                          <div class="text-show">
+                            <div class="show-data">
+                              <p>
+                                Yes, they can obtain your credit report. This
+                                will show your credit history and other money
+                                habits. They may consider you to be a potential
+                                risk as a tenant if you do not pay your bills on
+                                time.
+                              </p>
+                            </div>
+                          </div>
+                        </div> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="check-info-list last">
+                  <p><span>3.</span>550 is a great credit score.</p>
+                  <div class="check-list">
+                    <div class="filter">
+                      <div class="row">
+                        <div class="col-md-2">
+                          <ul>
+                            <li>
+                              <input
+                                class="check-box yes"
+                                id="t1"
+                                type="radio"
+                                value="true"
+                                name="q3"
+                                formControlName="q3"
+                              />
+                              <label for="t1">TRUE</label>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="col-md-2">
+                          <ul>
+                            <li>
+                              <input
+                                class="check-box no"
+                                id="t2"
+                                type="radio"
+                                value="false"
+                                name="q3"
+                                formControlName="q3"
+                              />
+                              <label for="t2">FALSE</label>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="check-info-list last">
+                  <p><span>4.</span> 800 is a bad credit score.</p>
+                  <div class="check-list">
+                    <div class="filter">
+                      <div class="row">
+                        <div class="col-md-2">
+                          <ul>
+                            <li>
+                              <input
+                                class="check-box yes"
+                                id="t3"
+                                type="radio"
+                                value="true"
+                                name="q4"
+                                formControlName="q4"
+                              />
+                              <label for="t3">TRUE</label>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="col-md-2">
+                          <ul>
+                            <li>
+                              <input
+                                class="check-box no"
+                                id="t4"
+                                type="radio"
+                                value="false"
+                                name="q4"
+                                formControlName="q4"
+                              />
+                              <label for="t4">FALSE</label>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="check-info-list last">
+                  <p>
+                    <span>5. </span> How often should you check your credit
+                    report?
+                  </p>
+                  <div class="check-list">
+                    <div class="filter">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <ul class="p-0">
+                            <li>
+                              <select
+                                class="form-control"
+                                id="report"
+                                formControlName="q5"
+                              >
+                                <option value="" selected disabled>
+                                  --Please Select--
+                                </option>
+                                <option value="daily">Once a day</option>
+                                <option value="weekly">Once a week</option>
+                                <option value="monthly">Once a month</option>
+                                <option value="yearly">Once a year</option>
+                              </select>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="login-btn">
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        (click)="submitCreditForm()"
+                      >
+                        SUBMIT
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="grant-money-modal">
+  <div
+    class="modal fade show"
+    id="grantmoney"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="title"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="title">GOOD NEWS!</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="text">
+            <h5>
+              You’ve applied and won <br />
+              a scholarship of
+            </h5>
+            <h3>${{ grantValue | formatPrice }}</h3>
+            <p>towards your monthly payments</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

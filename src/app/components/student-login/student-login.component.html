@@ -1,0 +1,182 @@
+<section class="banner login">
+    <div class="container">
+        <div class="logo">
+            <a href="#">
+                <img src="assets/images/credit-for-life-logo-big-blue.png" alt="logo" />
+            </a>
+        </div>
+    </div>
+</section>
+<section class="login-sec">
+    <div class="container">
+        <div class="text">
+            <h3>Student Login</h3>
+
+            <div class="login-form" >
+                <form class="needs-validation" [formGroup]="studentLoginForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                        <label for="accesscode">School Access Code:</label>
+                        <input type="text" class="form-control" id="accesscode" formControlName="schoolCode" required>
+                    </div>
+                    <div *ngIf="f.schoolCode.errors && (f.schoolCode.dirty || f.schoolCode.touched)" class="validationError">
+                        <div *ngIf="f.schoolCode.errors.required">SchoolCode is required
+                        </div> 
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Username:</label>
+                        <input type="text" class="form-control" id="email" formControlName="email" required>
+                    </div>
+                    <div *ngIf="f.email.errors &&  (f.email.dirty || f.email.touched)" class="validationError">
+                        <div *ngIf="f.email.errors.required">Email is required
+                        </div> 
+                        <div *ngIf="f.email.errors.pattern">Email is required
+                        </div> 
+                    </div>
+                    <div class="form-group">
+                        <label for="pass">Password:</label>
+                        <input type="password" class="form-control" id="pass" formControlName="password" required>
+                    </div>
+                    <div *ngIf="f.password.errors &&  (f.password.dirty || f.password.touched)" class="validationError">
+                        <div *ngIf="f.password.errors.required">Email is required
+                        </div> 
+                    </div>
+                    <div class="login-btn">
+                        <button type="submit" class="btn btn-primary">LOGIN</button>
+                        <!-- <button type="button" data-toggle="modal" data-target="#thanks" class="btn btn-primary">LOGIN</button> -->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="sponsors">
+    <div class="heading">
+        <div class="container">
+            <h3>MEET OUR FOUNDING PARTNERS</h3>
+        </div>
+    </div>
+    <div class="container">
+        <div class="sponsors-list">
+            <ul>
+                <li>
+                    <a href="#">
+                        <div class="logo">
+                            <img src="assets/images/spons-logo1.jpg" alt="logo">
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="logo">
+                            <img src="assets/images/spons-logo9.jpg" alt="logo">
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="logo">
+                            <img src="assets/images/spons-logo2.jpg" alt="logo">
+                        </div>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="#">
+                        <div class="logo">
+                            <img src="assets/images/spons-logo4.jpg" alt="logo">
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="logo">
+                            <img src="assets/images/spons-logo5.jpg" alt="logo">
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="logo">
+                            <img src="assets/images/spons-logo6.jpg" alt="logo">
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="logo">
+                            <img src="assets/images/spons-logo7.jpg" alt="logo">
+                        </div>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <div class="logo">
+                            <img src="assets/images/thesavings-bank.png" alt="logo">
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="logo">
+                            <img src="assets/images/westfield_logo2.png" alt="logo">
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            <div class="contact_btn">
+                <a href="#">CONTACT US </a>
+            </div>
+        </div>
+    </div>
+</section>
+<footer class="footer">
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="nav-bottom">
+                        <ul>
+                            <li><a routerLink="/money-modules">MONEY MODULES</a></li>
+                            <li><a routerLink="/help">HELP</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="logo">
+                        <a href="index.html">
+                            <img src="assets/images/credit-for-Life-logo.png" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+
+
+<div class="thanks-modal">
+    <div class="modal fade show" id="thanks" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <h4>THANKS FOR CONTACTING US!</h4>
+                        <p>We will get back to you shortly.</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

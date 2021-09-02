@@ -1,0 +1,87 @@
+<div>
+    <button class="btn btn-success" [disabled]="students.length < 1" (click)="exportexcel()">
+        {{students.length > 0 ? 'Export Data': 'No Data Available'}}
+    </button>
+</div>
+<div class="table-responsive">
+    <table class="table" id="excel-table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">School</th>
+                <th scope="col">Profession</th>
+                <th scope="col">Monthly Take Home Pay</th>
+                <th scope="col">Starting Savings Balance</th>
+                <th scope="col">Final Checking Balance</th>
+                <th scope="col">Final Savings Balance</th>
+                <th scope="col">Credit Card Balance</th>
+                <th scope="col" *ngFor="let checkpoint of checkpoints">{{checkpoint.title}}</th>
+                <!-- <th scope="col">Education & Training Selections</th>
+                <th scope="col">Food & Nutrition Selections</th>
+                <th scope="col">Health & Wellness Selections</th>
+                <th scope="col">Housing, etc Selections</th>
+                <th scope="col">Lifestyle Selections</th>
+                <th scope="col">Fun, Fun, Fun Selections</th>
+                <th scope="col">Part-Time Job Selections</th>
+                <th scope="col">Planning Future Selections</th>
+                <th scope="col">Transportation Selections</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let student of students; let i = index;">
+                <th scope="row">{{i+1}}</th>
+                <td>{{student.firstName}}</td>
+                <td>{{student.lastName}}</td>
+                <td>{{student.school?.organizationName}}</td>
+                <td>{{student.profession?.name}}</td>
+                <td>${{
+                    (student?.profession?.grossAnnualSalary -
+                    (student?.profession?.federalTax +
+                    student?.profession?.MATax +
+                    student?.profession?.medicare +
+                    student?.profession?.socSec)) /
+                    12 | formatPrice
+                    }}</td>
+                <td>${{student.begSavingAcc | formatPrice}}</td>
+                <td>${{student.checkingAcc | formatPrice}}</td>
+                <td>${{student.savingAcc | formatPrice}}</td>
+                <td>${{student.creditCard | formatPrice}}</td>
+                <td class="selections" *ngFor="let checkpoint of checkpoints; let i = index;">
+                    {{student.selections ? student.selections[i]: ''}}
+                </td>
+                <!-- <td>
+                    <ng-container *ngIf="student.selections">
+                        <span *ngFor="let selection of student.selections[0]"></span>
+                    </ng-container>
+                </td>
+                <td>
+                    <ng-container *ngIf="student.selections">
+                        <span *ngFor="let selection of student.selections[0]"></span>
+                    </ng-container>
+                </td>
+                <td>
+                    <ng-container *ngIf="student.selections">
+                        <span *ngFor="let selection of student.selections[0]"></span>
+                    </ng-container>
+                </td>
+                <td>
+                    <ng-container *ngIf="student.selections">
+                        <span *ngFor="let selection of student.selections[0]"></span>
+                    </ng-container>
+                </td>
+                <td>
+                    <ng-container *ngIf="student.selections">
+                        <span *ngFor="let selection of student.selections[0]"></span>
+                    </ng-container>
+                </td>
+                <td>
+                    <ng-container *ngIf="student.selections">
+                        <span *ngFor="let selection of student.selections[0]"></span>
+                    </ng-container>
+                </td> -->
+            </tr>
+        </tbody>
+    </table>
+</div>

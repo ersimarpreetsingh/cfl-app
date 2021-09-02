@@ -7,13 +7,17 @@
 
   <base href="/" />
 
-  <meta name="color-scheme" content="light dark" />
+  <meta name="color-scheme" content="light" />
   <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="format-detection" content="telephone=no" />
   <meta name="msapplication-tap-highlight" content="no" />
 
   <link rel="icon" type="image/png" href="assets/icon/favicon.png" />
-
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
+  <link rel="stylesheet" href="assets/style/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.23/datatables.min.css" />
+  <link rel="stylesheet" href="assets/style/css.css" />
   <!-- add to homescreen for ios -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
@@ -21,6 +25,151 @@
 
 <body>
   <app-root></app-root>
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.23/datatables.min.js"></script>
+  <script src="https://kit.fontawesome.com/15d0e25459.js" crossorigin="anonymous"></script>
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    // $(document).ready(function () {
+    //   setTimeout(() => {
+    //     $("#data-tables").DataTable({
+    //       paging: true,
+    //       ordering: true,
+    //       info: true,
+    //     });
+    //   }, 500);
+    // });
+    // $(function () {
+    //   $(".filter .yes").click(function () {
+    //     if ($(this).is(":checked")) {
+    //       $(this)
+    //         .parent()
+    //         .parent()
+    //         .parent()
+    //         .parent("div")
+    //         .parent("div")
+    //         .find(".show-data")
+    //         .show();
+    //     } else {
+    //       $(this)
+    //         .parent()
+    //         .parent()
+    //         .parent()
+    //         .parent("div")
+    //         .parent("div")
+    //         .find(".show-data")
+    //         .hide();
+    //     }
+    //   });
+
+    //   $(".filter .no").click(function () {
+    //     if ($(this).is(":checked")) {
+    //       $(".no")
+    //         .parent()
+    //         .parent()
+    //         .parent()
+    //         .parent("div")
+    //         .find(".show-data")
+    //         .hide();
+    //       $(".no")
+    //         .parent()
+    //         .parent()
+    //         .parent()
+    //         .parent("div")
+    //         .find(".yes")
+    //         .prop("checked", false);
+    //     }
+    //   });
+    // });
+
+    function initDatatables() {
+      $("#data-tables").DataTable({
+        paging: true,
+        ordering: true,
+        info: true,
+      });
+    }
+
+    function destroyDatatables() {
+      $("#data-tables").DataTable().destroy();
+    }
+
+    function runChatScript(code) {
+      window.chaportConfig.operators = code;
+    }
+
+    function stopSession() {
+      window.chaport.q('stopSession')
+    }
+
+    function startSession() {
+      window.chaport.q('startSession')
+    }
+
+    function showChatWindow() {
+      window.chaport.q('showLauncher');
+    }
+
+    function hideChatWindow() {
+      window.chaport.q('hideLauncher');
+    }
+
+    function openChat() {
+      window.chaport.q('open');
+    }
+    function openChatContainer() {
+      window.chaport.q('openIn', [{ selector: '#chat-container' }]);
+    }
+
+    function closeChat() {
+      window.chaport.q('close');
+    }
+
+    function activateTab(tabId) {
+      console.log(tabId);
+      $('#nav-tabContent .tab-pane').removeClass('show active');
+      $('#nav-tab .nav-item').removeClass('active');
+      $(`#${tabId}`).addClass('show active');
+      $(`#${tabId}-tab`).addClass('active');
+    }
+  </script>
+  <!-- Begin of Chaport Live Chat code -->
+  <script type="text/javascript">
+    (function (w, d, v3) {
+      w.chaportConfig = {
+        appId: "604a7880a71e532cf96eddb4",
+        responsive: true,
+        session: {
+          autoStart: false,
+          persist: false,
+        },
+        launcher: {
+          show: false,
+        },
+      };
+
+      if (w.chaport) return;
+      v3 = w.chaport = {};
+      v3._q = [];
+      v3._l = {};
+      v3.q = function () {
+        v3._q.push(arguments);
+      };
+      v3.on = function (e, fn) {
+        if (!v3._l[e]) v3._l[e] = [];
+        v3._l[e].push(fn);
+      };
+      var s = d.createElement("script");
+      s.type = "text/javascript";
+      s.async = true;
+      s.src = "https://app.chaport.com/javascripts/insert.js";
+      var ss = d.getElementsByTagName("script")[0];
+      ss.parentNode.insertBefore(s, ss);
+    })(window, document);
+  </script>
+  <!-- End of Chaport Live Chat code -->
 </body>
 
 </html>

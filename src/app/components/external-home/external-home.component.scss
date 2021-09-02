@@ -1,0 +1,44 @@
+.validationError {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;
+}
+.privacy {
+  background: white;
+  padding: 20px;
+  font-size: 14px;
+  text-align: justify;
+}
+
+.participate-form {
+  ul {
+    list-style: none;
+  }
+  li {
+    &.link-bg {
+      text-align: center;
+      &.student-reg {
+        color: #fff;
+        background-color: #f35b04;
+      }
+      &.login-home {
+        color: #fff;
+        background-color: #00d3c1;
+      }
+      a {
+        line-height: 20px;
+        padding: 16px 0px;
+        display: block;
+        color: #fff;
+        font-family: "Poppins";
+        font-weight: bold;
+        font-size: 18px;
+        text-transform: uppercase;
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}

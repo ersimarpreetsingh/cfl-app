@@ -1,0 +1,15 @@
+<div *ngIf="show" 
+  class="alert fade show"
+  [ngClass]="{ 'alert-success': isSuccess, 'alert-danger': !isSuccess }"
+  role="alert"
+>
+  {{ message }}
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="hideSnackbar()"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>

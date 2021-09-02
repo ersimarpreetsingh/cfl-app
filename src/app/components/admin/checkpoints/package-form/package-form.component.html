@@ -1,0 +1,217 @@
+<div class="admin-table">
+  <div class="container-fluid">
+    <form class="needs-validation" [formGroup]="packageForm">
+      <div class="form-group">
+        <label for="name">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          placeholder="Title"
+          formControlName="title"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <angular-editor
+          formControlName="description"
+          class="form-control"
+          id="description"
+          placeholder="Description"
+        ></angular-editor>
+      </div>
+
+      <div class="form-group">
+        <label for="priceType">Price Type </label>
+        <select class="form-control" id="priceType" formControlName="priceType">
+          <option value="" selected>--SELECT TYPE--</option>
+          <option value="value">Price Value</option>
+          <option value="percent">Percentage of</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="price">Price </label>
+        <input
+          class="form-control"
+          type="text"
+          id="price"
+          placeholder="Price"
+          formControlName="price"
+        />
+      </div>
+      <div class="form-group" *ngIf="packageForm.value.priceType === 'percent'">
+        <label for="percentOf">Percentage of </label>
+        <select class="form-control" id="percentOf" formControlName="percentOf">
+          <option disabled selected>--SELECT TYPE--</option>
+          <option value="grossAnnualSalary">Gross Annual Salary</option>
+          <option value="grossMonthlySalary">Gross Monthly Salary</option>
+          <option value="monthlyTakeHomePay">Monthly Take Home</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="debitFrom">Debit from </label>
+        <select class="form-control" id="debitFrom" formControlName="debitFrom">
+          <option disabled selected>--SELECT TYPE--</option>
+          <option value="NONE">NONE</option>
+          <option value="CA">Checking Account</option>
+          <option value="SA">Savings Account</option>
+          <option value="RA">Retirement Account</option>
+          <option value="CC">Credit Card</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="creditTo">Credit to </label>
+        <select class="form-control" id="creditTo" formControlName="creditTo">
+          <option disabled selected>--SELECT TYPE--</option>
+          <option value="NONE">NONE</option>
+          <option value="CA">Checking Account</option>
+          <option value="SA">Savings Account</option>
+          <option value="RA">Retirement Account</option>
+          <option value="CC">Credit Card</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <input
+          id="hasAdditionalPricing"
+          type="checkbox"
+          formControlName="hasAdditionalPricing"
+        />
+        <label for="hasAdditionalPricing"
+          >This package contains an additional cost. (eg. Security deposits
+          etc.)</label
+        >
+      </div>
+
+      <div *ngIf="packageForm.value.hasAdditionalPricing"  class="border border-dark p-3">
+        <div class="form-group">
+          <label for="additionalPriceType">Price Type </label>
+          <select
+            class="form-control"
+            id="additionalPriceType"
+            formControlName="additionalPriceType"
+          >
+            <option value="" selected>--SELECT TYPE--</option>
+            <option value="value">Price Value</option>
+            <option value="percent">Percentage of</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="additioanlPrice">Price </label>
+          <input
+            class="form-control"
+            type="text"
+            id="additioanlPrice"
+            placeholder="Security Deposits etc."
+            formControlName="additioanlPrice"
+          />
+        </div>
+        <div
+          class="form-group"
+          *ngIf="packageForm.value.priceType === 'percent'"
+        >
+          <label for="additionalPercentOf">Percentage of </label>
+          <select
+            class="form-control"
+            id="additionalPercentOf"
+            formControlName="additionalPercentOf"
+          >
+            <option disabled selected>--SELECT TYPE--</option>
+            <option value="grossAnnualSalary">Gross Annual Salary</option>
+            <option value="grossMonthlySalary">Gross Monthly Salary</option>
+            <option value="monthlyTakeHomePay">Monthly Take Home</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="additionalDebitFrom">Debit from </label>
+          <select
+            class="form-control"
+            id="additionalDebitFrom"
+            formControlName="additionalDebitFrom"
+          >
+            <option disabled selected>--SELECT TYPE--</option>
+            <option value="NONE">NONE</option>
+            <option value="CA">Checking Account</option>
+            <option value="SA">Savings Account</option>
+            <option value="RA">Retirement Account</option>
+            <option value="CC">Credit Card</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="additionalCreditTo">Credit to </label>
+          <select
+            class="form-control"
+            id="additionalCreditTo"
+            formControlName="additionalCreditTo"
+          >
+            <option disabled selected>--SELECT TYPE--</option>
+            <option value="NONE">NONE</option>
+            <option value="CA">Checking Account</option>
+            <option value="SA">Savings Account</option>
+            <option value="RA">Retirement Account</option>
+            <option value="CC">Credit Card</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="moreInfo">More Information</label>
+        <angular-editor
+          formControlName="moreInfo"
+          class="form-control"
+          id="moreInfo"
+          placeholder="More Information"
+        ></angular-editor>
+      </div>
+      <div class="form-group">
+        <label for="requiredDegree"
+          >Select if this is an Educational Package</label
+        >
+        <select
+          type="text"
+          class="form-control"
+          id="degreeKey"
+          formControlName="degreeKey"
+        >
+          <option value="NONE" selected disabled>--Select a degree--</option>
+          <option value="A">Associate</option>
+          <option value="B">Bachelors</option>
+          <option value="M">Masters</option>
+          <option value="JD">Juris Doctorate Degree</option>
+          <option value="MD">Doctoral (MD)</option>
+          <option value="PhD">Doctoral (PH.D)</option>
+          <option value="DC">DC</option>
+          <option value="DO">DO</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <input id="forMilitary" type="checkbox" formControlName="forMilitary" />
+        <label for="forMilitary"
+          >This package is for military professionals</label
+        >
+      </div>
+
+      <div class="form-group">
+        <input
+          id="useAllSavings"
+          type="checkbox"
+          formControlName="useAllSavings"
+        />
+        <label for="useAllSavings"
+          >This package will use all the user's savings balance</label
+        >
+      </div>
+
+      <button type="submit" class="btn btn-primary" (click)="addPackage()">
+        {{ submitButtonText }}
+      </button>
+    </form>
+  </div>
+</div>

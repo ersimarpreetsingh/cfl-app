@@ -1,0 +1,168 @@
+<section class="banner login">
+    <div class="container">
+        <div class="logo">
+            <a href="#">
+                <img src="assets/images/credit-for-life-logo-big-blue.png" alt="logo" />
+            </a>
+        </div>
+    </div>
+</section>
+<section class="login-sec">
+    <div class="container">
+        <div class="text">
+            <h3>Student Registration</h3>
+
+            <div class="login-form">
+                <form class="needs-validation" [formGroup]="studentform" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                        <label for="accesscode">School Access Code:</label>
+                        <input type="text" class="form-control" id="accesscode" formControlName="schoolCode">
+                    </div>
+                    <div *ngIf="f.schoolCode.errors && (f.schoolCode.dirty || f.schoolCode.touched)" class="validationError">
+                        <div *ngIf="f.schoolCode.errors.required">SchoolCode is required
+                        </div> 
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Username:</label>
+                        <input type="text" class="form-control" id="email" formControlName="email" required>
+                    </div>
+                    <div *ngIf="f.email.errors && (f.email.dirty || f.email.touched)" class="validationError">
+                        <div *ngIf="f.email.errors?.required">Email is required
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" class="form-control" id="password" formControlName="password" required>
+                    </div>
+                    <div *ngIf="f.password.errors && (f.password.dirty || f.password.touched)" class="validationError">
+                       <div *ngIf="f.password.errors.required">Password is required
+                       </div> 
+                   </div>
+                    <div class="form-group">
+                        <label for="c-password">Confirm Password:</label>
+                        <input type="password" class="form-control" id="c-password" formControlName="confirmPassword" required>
+                    </div>
+                    <div *ngIf="f.confirmPassword.errors && (f.confirmPassword.dirty || f.confirmPassword.touched)" class="validationError">
+                         <div *ngIf="f.confirmPassword.errors.required ">Confirm Password is required</div> 
+                        <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+                    </div>
+                    <div class="login-btn">
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="sponsors">
+    <div class="heading">
+        <div class="container">
+            <h3>MEET OUR FOUNDING PARTNERS</h3>
+        </div>
+    </div>
+    <div class="container">
+        <div class="sponsors-list">
+            <ul>
+                <li>
+                    <a href="#">
+                        <div class="logo">
+                            <img src="assets/images/spons-logo1.jpg" alt="logo">
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="logo">
+                            <img src="assets/images/spons-logo9.jpg" alt="logo">
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="logo">
+                            <img src="assets/images/spons-logo2.jpg" alt="logo">
+                        </div>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="#">
+                        <div class="logo">
+                            <img src="assets/images/spons-logo4.jpg" alt="logo">
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="logo">
+                            <img src="assets/images/spons-logo5.jpg" alt="logo">
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="logo">
+                            <img src="assets/images/spons-logo6.jpg" alt="logo">
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="logo">
+                            <img src="assets/images/spons-logo7.jpg" alt="logo">
+                        </div>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <div class="logo">
+                            <img src="assets/images/thesavings-bank.png" alt="logo">
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="logo">
+                            <img src="assets/images/westfield_logo2.png" alt="logo">
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            <div class="contact_btn">
+                <a href="#">CONTACT US </a>
+            </div>
+        </div>
+    </div>
+</section>
+<footer class="footer">
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="nav-bottom">
+                        <ul>
+                            <li><a routerLink="/money-modules">MONEY MODULES</a></li>
+                            <li><a routerLink="/help">HELP</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="logo">
+                        <a routerLink="/">
+                            <img src="assets/images/credit-for-Life-logo.png" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="privacy">
+        We value the privacy of individuals who visit our website. Personal
+        information including name and email address, etc. is provided on a voluntary
+        basis only. We use this information to respond to inquiries and requests for
+        further information. We do not share or sell the personal information you
+        provide us to a third party at any time.
+      </div>
+</footer>

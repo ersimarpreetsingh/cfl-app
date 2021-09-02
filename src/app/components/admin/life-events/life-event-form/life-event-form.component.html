@@ -1,0 +1,86 @@
+<div class="admin-table">
+    <div class="container-fluid">
+      <form class="needs-validation" [formGroup]="lifeEventForm">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            placeholder="Title"
+            formControlName="title"
+          />
+        </div>
+  
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea
+            class="form-control"
+            id="description"
+            placeholder="Description"
+            formControlName="description"
+          ></textarea>
+        </div>
+  
+        <div class="form-group">
+          <label for="type">Type of Event</label>
+          <select
+            class="form-control"
+            id="type"
+            placeholder="Select a type"
+            formControlName="type"
+          >
+            <option selected disabled value="">--Please Select Type--</option>
+            <option value="good">Good</option>
+            <option value="bad">Bad</option>
+          </select>
+        </div>
+  
+        <div class="form-group">
+          <label for="price">Money value </label>
+          <input
+            type="text"
+            class="form-control"
+            id="price"
+            placeholder="Enter money value"
+            formControlName="price"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="debitFrom">Debit from </label>
+          <select
+            class="form-control"
+            id="debitFrom"
+            formControlName="debitFrom"
+          >
+            <option value="" disabled selected>--SELECT TYPE--</option>
+            <option value="NONE">NONE</option>
+            <option value="CA">Checking Account</option>
+            <option value="SA">Savings Account</option>
+            <option value="CC">Credit Card</option>
+          </select>
+        </div>
+  
+        <div class="form-group">
+          <label for="creditTo">Credit to </label>
+          <select
+            class="form-control"
+            id="creditTo"
+            formControlName="creditTo"
+          >
+            <option value="" disabled selected>--SELECT TYPE--</option>
+            <option value="NONE">NONE</option>
+            <option value="CA">Checking Account</option>
+            <option value="SA">Savings Account</option>
+            <option value="CC">Credit Card</option>
+          </select>
+        </div>
+  
+        <button type="submit" class="btn btn-primary" (click)="addLifeEvent()">
+          {{ submitButtonText }}
+        </button>
+      </form>
+    </div>
+  </div>
+  

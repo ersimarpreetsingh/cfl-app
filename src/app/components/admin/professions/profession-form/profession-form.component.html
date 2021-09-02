@@ -1,0 +1,139 @@
+<div class="admin-table">
+  <div class="container-fluid">
+    <form class="needs-validation" [formGroup]="professionForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          placeholder="Name"
+          formControlName="name"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="requiredDegree">Required Degree</label>
+        <select
+          type="text"
+          class="form-control"
+          id="requiredDegree"
+          formControlName="requiredDegree"
+        >
+          <option selected disabled>--Select a degree--</option>
+          <option value="A">Associate</option>
+          <option value="B">Bachelors</option>
+          <option value="M">Masters</option>
+          <option value="JD">Juris Doctorate Degree</option>
+          <option value="MD">Doctoral (MD)</option>
+          <option value="PhD">Doctoral (PH.D)</option>
+          <option value="DC">DC</option>
+          <option value="DO">DO</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="studentOption">Student Option</label>
+        <input
+          type="text"
+          class="form-control"
+          id="studentOption"
+          placeholder="Student Option"
+          formControlName="studentOption"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="grossAnnualSalary">Gross Annual Salary</label>
+        <input
+          type="text"
+          class="form-control"
+          id="grossAnnualSalary"
+          placeholder="Gross Annual Salary"
+          formControlName="grossAnnualSalary"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="taxableIncome">Taxable Income</label>
+        <input
+          type="text"
+          class="form-control"
+          id="taxableIncome"
+          placeholder="Taxable Income"
+          formControlName="taxableIncome"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="federalTax">Federal Tax</label>
+        <input
+          type="text"
+          class="form-control"
+          id="federalTax"
+          placeholder="Federal Tax"
+          formControlName="federalTax"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="MATax">MA Tax</label>
+        <input
+          type="text"
+          class="form-control"
+          id="MATax"
+          placeholder="MA Tax"
+          formControlName="MATax"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="socSec">Social Security</label>
+        <input
+          type="text"
+          class="form-control"
+          id="socSec"
+          placeholder="Social Security"
+          formControlName="socSec"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="medicare">Medicare</label>
+        <input
+          type="text"
+          class="form-control"
+          id="medicare"
+          placeholder="Medicare"
+          formControlName="medicare"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="netPayYearly">Net Pay (Yearly)</label>
+        <input
+          type="text"
+          class="form-control"
+          id="netPayYearly"
+          placeholder="Net Pay (Yearly)"
+          formControlName="netPayYearly"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="netPayMonthly">Net Pay (Monthly)</label>
+        <input
+          type="text"
+          class="form-control"
+          id="netPayMonthly"
+          placeholder="Net Pay (Monthly)"
+          formControlName="netPayMonthly"
+        />
+      </div>
+
+      <button type="submit" class="btn btn-primary" (click)="addProfession()">
+        {{submitButtonText}}
+      </button>
+    </form>
+  </div>
+</div>

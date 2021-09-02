@@ -1,0 +1,20 @@
+.container {
+    .d-flex {
+        img {
+            background-color: transparent;
+            border: none;
+            margin-bottom: 30px;
+        }
+    }
+}
+
+.validationError {
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80%;
+    color: #dc3545;
+}
+
+.admin-table {
+    padding: 50px 0px;
+}

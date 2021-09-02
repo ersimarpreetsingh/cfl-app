@@ -1,0 +1,79 @@
+@media (min-width: 1200px) {
+  .loans-summary .account-steps .check-account .text h4 {
+    font-size: 36px;
+  }
+}
+.transfer {
+  margin: 1.5rem 0;
+  padding: 0 15px;
+  background: #006ba6;
+  .title {
+    padding: 10px 15px;
+    @media (min-width: 768px) {
+      align-self: center;
+    }
+    h2 {
+      color: #fff;
+      font: bold 16px/25px "Poppins";
+      text-transform: uppercase;
+      margin: 0;
+      @media (max-width: 767px) {
+        text-align: center;
+      }
+    }
+  }
+  .select,
+  .amount {
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
+  select {
+    background: #e6e6e6;
+    border-radius: 6px;
+    border: 0 none;
+    height: 48px;
+    padding: 10px;
+    width: 100%;
+  }
+
+  .amount {
+    display: flex;
+
+    @media (max-width: 767px) {
+      flex-direction: column;
+    }
+    input {
+      border-radius: 6px;
+      background: #e6e6e6;
+      border: 0 none;
+      outline: 0 none;
+      flex-grow: 1;
+      height: 48px;
+      padding: 10px;
+      @media (min-width: 768px) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
+  }
+  button {
+    border-radius: 6px;
+    @media (min-width: 768px) {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    font: bold 20px/30px "Poppins";
+    color: #fff;
+    background-color: #f35b04;
+    height: 48px;
+    text-decoration: none;
+    padding: 10px 14px;
+    border: 0 none;
+    &.disabled {
+      opacity: 0.7;
+    }
+    @media (max-width: 767px) {
+      margin-top: 20px;
+    }
+  }
+}

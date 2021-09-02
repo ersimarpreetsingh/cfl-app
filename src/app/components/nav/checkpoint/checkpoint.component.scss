@@ -1,0 +1,225 @@
+a {
+    &.btn {
+        &.disabled {
+            background-color: #858585 !important;
+            opacity: 0.8 !important;
+        }
+    }
+}
+
+.question-sec {
+    background: #006ba6;
+    width: 25px;
+    height: 25px;
+    float: right;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    i {
+        color: #fff;
+        font-size: 15px;
+    }
+}
+
+.life-happens-modal .modal .modal-dialog {
+    max-width: 650px;
+}
+
+.life-happens-modal .modal .modal-dialog .modal-content .modal-header .food-sec {
+    padding-right: 0px;
+}
+
+.life-happens-modal .modal .modal-dialog .modal-content .modal-header .food-sec .row {
+    align-items: inherit;
+}
+
+.life-happens-modal .modal .modal-dialog .modal-content .modal-header .food-sec .box {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+// .life-happens-modal .modal .modal-dialog .modal-content .modal-header .food-sec .text h4 {
+//     font-size: 34px;
+//     line-height: 46px;
+// }
+// .life-happens-modal .modal .modal-dialog .modal-content .modal-header .food-sec .text p {
+//     font: 18px/24px 'Poppins';
+//     font-weight: 500;
+// }
+@keyframes fadeInUp {
+    from {
+        transform: translate3d(0, 40px, 0);
+    }
+    to {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeInUp {
+    from {
+        transform: translate3d(0, 40px, 0);
+    }
+    to {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+}
+
+.animated {
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-fill-mode: both;
+}
+
+.animatedFadeInUp {
+    opacity: 0;
+}
+
+.fadeInUp {
+    opacity: 0;
+    animation-name: fadeInUp;
+    -webkit-animation-name: fadeInUp;
+}
+
+.life-happens-modal .modal .modal-dialog .modal-content .modal-body .text .text-inner {
+    margin: 0;
+    position: absolute;
+    top: 52%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+    padding: 0px 20px;
+}
+
+.life-happens-modal .modal .modal-dialog .modal-content .modal-body .text .text-inner h2 {
+    font-size: 14px;
+    font-weight: bold;
+    font-family: "Poppins";
+    color: #0b2363;
+    line-height: 1;
+}
+
+.life-happens-modal .modal .modal-dialog .modal-content .modal-body .text .text-inner p {
+    color: #0a1227;
+    font: 12px/16px "Poppins";
+    font-weight: bold;
+}
+
+.life-happens-modal .modal .modal-dialog .modal-content .modal-body .text .text-inner p br {
+    display: none;
+}
+
+@media (min-width: 370px) {
+    .life-happens-modal .modal .modal-dialog .modal-content .modal-body .text .text-inner h2 {
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 480px) {
+    .life-happens-modal .modal .modal-dialog .modal-content .modal-body .text .text-inner p br {
+        display: block;
+    }
+}
+
+@media (min-width: 640px) {
+    .life-happens-modal .modal .modal-dialog .modal-content .modal-body .text .text-inner h2 {
+        font-size: 22px;
+    }
+    .life-happens-modal .modal .modal-dialog .modal-content .modal-body .text .text-inner {
+        padding: 0px;
+    }
+}
+
+@media (min-width: 768px) {
+    .life-happens-modal .modal .modal-dialog .modal-content .modal-body .text .text-inner h2 {
+        font-size: 29px;
+    }
+    .life-happens-modal .modal .modal-dialog .modal-content .modal-body .text .text-inner p {
+        font: 18px/24px "Poppins";
+        font-weight: bold;
+    }
+}
+
+.calculator-modal .modal {
+    background: none !important;
+}
+
+.calculator-modal .modal .modal-dialog .modal-content .modal-body .text .cost-sec p {
+    font: 24px/30px "Poppins";
+}
+
+.annual_salary p {
+    background-color: #fff;
+    padding: 1px 6px;
+    color: #212529 !important;
+    font: 26px/45px "Poppins" !important;
+    font-weight: 300;
+    text-align: right;
+}
+
+@media (min-width: 768px) {
+    .annual_salary p {
+        font: 36px/55px "Poppins" !important;
+    }
+}
+
+.credit-score-one-modal {
+    input[type="radio"] {
+        -webkit-appearance: checkbox;
+        -moz-appearance: checkbox;
+        -ms-appearance: checkbox;
+        /* not currently supported */
+        -o-appearance: checkbox;
+        /* not currently supported */
+    }
+}
+
+.grant-money {
+    .container {
+        .disabled {
+            background-color: #858585;
+        }
+    }
+}
+
+.cfl-tabs {
+    .nav-link {
+        background-color: #006BA6;
+        border: 0 none;
+        border-right: 1px solid #fff;
+        border-radius: 0;
+        color: #fff;
+        font: bold 22px 'Poppins';
+        padding: 15px 10px;
+        text-transform: uppercase;
+        &.active {
+            background-color: #F35B04;
+        }
+        &:last-child {
+            border-right: 0 none;
+        }
+    }
+}
+
+.click-cta {
+    .tab {
+        background-color: #006BA6;
+        color: #fff;
+        font: 500 18px "Poppins";
+        padding: 15px 10px;
+        margin: 0 10px;
+        width: 140px;
+        cursor: pointer;
+        i {
+            font-size: 14px;
+        }
+        &:active {
+            background-color: #F35B04;
+        }
+    }
+}

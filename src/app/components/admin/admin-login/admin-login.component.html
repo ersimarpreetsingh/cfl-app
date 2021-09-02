@@ -1,0 +1,66 @@
+<div class="admin-table">
+  <div class="container-fluid">
+    <div class="container">
+      <div class="d-flex flex-column align-items-center">
+        <img
+          class="img-thumbnail"
+          width="20%"
+          src="assets/images/logo-blue.png"
+          alt="Credit For Life"
+        />
+        <h2>Admin Login</h2>
+      </div>
+    </div>
+    <div class="container">
+      <form
+        class="needs-validation"
+        [formGroup]="adminLogInForm"
+        (ngSubmit)="onSubmit()"
+      >
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            placeholder="Enter email"
+            formControlName="email"
+            required
+          />
+          <div
+            *ngIf="f.email.errors && (f.email.dirty || f.email.touched)"
+            class="validationError"
+          >
+            <div *ngIf="f.email.errors.required">Email is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            placeholder="Password"
+            formControlName="password"
+            required
+          />
+          <div
+            *ngIf="
+              f.password.errors && (f.password.dirty || f.password.touched)
+            "
+            class="validationError"
+          >
+            <div *ngIf="f.password.errors.required">Password is required</div>
+          </div>
+        </div>
+        <button
+          type="login"
+          [disabled]="!adminLogInForm.valid"
+          class="btn btn-primary"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

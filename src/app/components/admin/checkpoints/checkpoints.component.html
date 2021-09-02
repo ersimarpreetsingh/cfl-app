@@ -1,0 +1,121 @@
+<div class="admin-table">
+  <div class="container-fluid">
+    <div class="d-flex flex-row justify-content-end">
+      <button type="button" class="btn btn-success" routerLink="new">
+        Add new checkpoint
+      </button>
+    </div>
+
+    <div id="accordion">
+      <div class="card" *ngFor="let checkpoint of checkpoints; let i = index">
+        <div
+          class="card-header d-flex flex-row justify-content-between"
+          id="heading{{ i }}"
+        >
+          <h5 class="mb-0">
+            <button
+              class="btn btn-link"
+              data-toggle="collapse"
+              [attr.data-target]="'#collapse' + i"
+              aria-expanded="true"
+              [attr.aria-controls]="'collapse' + i"
+            >
+              {{ checkpoint.title }}
+            </button>
+          </h5>
+          <div class="btn-group btn-group-sm">
+            <button class="btn btn-primary" routerLink="{{ checkpoint._id }}">
+              <i class="far fa-edit"></i>
+            </button>
+            <!-- <button class="btn btn-danger">
+                <i class="far fa-trash-alt"></i>
+              </button> -->
+          </div>
+        </div>
+
+        <div
+          id="collapse{{ i }}"
+          class="collapse"
+          aria-labelledby="headingOne"
+          data-parent="#accordion"
+        >
+          <div class="card-body">
+            <div class="d-flex flex-row justify-content-between">
+              <h3>Package</h3>
+              <button
+                type="button"
+                class="btn btn-success"
+                routerLink="{{ checkpoint._id }}/package/new"
+              >
+                Add New package
+              </button>
+            </div>
+
+            <div id="accordion2">
+              <div class="card" *ngFor="let packageitem of checkpoint.packages">
+                <div
+                  class="card-header d-flex flex-row justify-content-between"
+                  id="heading{{ packageitem._id }}"
+                >
+                  <h5 class="mb-0">
+                    <button
+                      class="btn btn-link"
+                      data-toggle="collapse"
+                      [attr.data-target]="'#collapse' + packageitem._id"
+                      aria-expanded="true"
+                      [attr.aria-controls]="'collapse' + packageitem._id"
+                    >
+                      {{ packageitem.title }}
+                    </button>
+                  </h5>
+                  <div class="btn-group btn-group-sm">
+                    <button class="btn btn-warning" routerLink="{{ checkpoint._id }}/package/{{packageitem._id}}">
+                      <i class="far fa-edit"></i>
+                    </button>
+                    <button class="btn btn-primary" routerLink="{{ checkpoint._id }}/package/{{packageitem._id}}/new">
+                      Add Sub Package
+                    </button>
+                  </div>
+                </div>
+
+                <div
+                  id="collapse{{ packageitem._id }}"
+                  class="collapse"
+                  [attr.aria-labelledby]="'heading' + packageitem._id"
+                  data-parent="#accordion2"
+                >
+                  <div class="card-body">
+                    <div
+                      class="d-flex flex-row justify-content-between"
+                      id="heading{{ i }}"
+                      *ngFor="let subPack of packageitem.subPackages"
+                    >
+                      <h5 class="mb-0" >
+                        <button
+                          class="btn btn-link"
+                        >
+                          {{ subPack.title }}
+                        </button>
+                      </h5>
+                      <div class="btn-group btn-group-sm">
+                        <button
+                          class="btn btn-primary"
+                          routerLink="{{ checkpoint._id }}/package/{{subPack._id}}"
+                        >
+                          <i class="far fa-edit"></i>
+                        </button>
+                        <button class="btn btn-danger" (click)="deletePackage(subPack._id)">
+                          <i class="far fa-trash-alt"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

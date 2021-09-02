@@ -1,0 +1,207 @@
+<nav class="navbar navbar-expand-xl navbar-light site-nav">
+  <div class="container-fluid align-items-center">
+    <a class="navbar-brand" routerLink="index">
+      <img src="assets/images/credit-for-Life-logo.png" alt=""
+    /></a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#main-nav"
+      aria-controls="main-nav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="main-nav">
+      <ul class="navbar-nav ml-auto">
+        <li>
+          <a
+            >CHECKING BALANCE
+            <span>${{ user.checkingAcc | formatPrice }}</span></a
+          >
+        </li>
+        <li>
+          <a
+            >SAVINGS BALANCE <span>${{ user.savingAcc | formatPrice }}</span></a
+          >
+        </li>
+        <li>
+          <a
+            >RETIREMENT BALANCE
+            <span>${{ user.retirementAcc | formatPrice }}</span></a
+          >
+        </li>
+        <li>
+          <a
+            >Credit Card Balance
+            <span>${{ user.creditCard | formatPrice }}</span></a
+          >
+        </li>
+        <li class="link-bg">
+          <a routerLink="profile" class="profile">PROFILE</a>
+        </li>
+        <li class="link-bg">
+          <a href="#" class="help">HELP</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<section class="banner">
+  <div class="container">
+    <form class="form" [ngStyle]="{ display: alldone ? 'none' : 'flex' }">
+      <div class="inputGroup" *ngFor="let checkpoint of checkpoints">
+        <input
+          id="{{ checkpoint._id }}"
+          name="check"
+          type="checkbox"
+          [checked]="checkpoint.completed"
+          (click)="clickCheckbox($event)"
+        />
+        <label for="{{ checkpoint._id }}">
+          <a routerLink="checkpoint/{{ checkpoint._id }}" href="/nav/checkpoint/{{checkpoint._id}}">{{
+            checkpoint.title
+          }}</a></label
+        >
+      </div>
+    </form>
+    <div
+      class="justify-content-center"
+      [ngStyle]="{ display: !alldone ? 'none' : 'flex' }"
+    >
+      <div class="btn-grp w-100 d-flex justify-content-around">
+        <button class="btn btn-primary" (click)="print()">
+          Download budget review sheet
+        </button>
+        <button class="btn btn-primary" (click)="routeToChat()">
+          Chat with counselor
+        </button>
+        <button class="btn btn-primary" (click)="copyProfileLink()">
+          Copy public profile link
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<router-outlet></router-outlet>
+
+<div class="budget-pop-up">
+  <div
+    class="modal fade show"
+    id="budget"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="title"
+    aria-hidden="true"
+    style="padding-right: 17px"
+    [ngStyle]="{ display: alldone && displayAllDone ? 'block' : 'none' }"
+  >
+    <div
+      class="modal-dialog modal-dialog-scrollable modal-dialog-centered"
+      role="document"
+    >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="title">
+            YOU’VE COMPLETED <br />
+            ALL THE CHECKPOINTS
+          </h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+            (click)="hideAllDonePopup()"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="text" *ngIf="!creditTransfer">
+            <h5>
+              <span>Next step?</span> Finish up and talk with a counselor, or go
+              back and review your Budget Sheet.
+            </h5>
+            <div class="budget-sheet-btn row">
+              <div class="budget-btn col-md-4">
+                <a class="blue" (click)="routeToProfile()"
+                  >REVIEW YOUR <br class="d-none d-md-block" />BUDGET SHEET</a
+                >
+              </div>
+              <div class="budget-btn col-md-4">
+                <a (click)="routeToChat()">CHAT WITH COUNSELOR</a>
+              </div>
+              <div class="budget-btn col-md-4">
+                <a (click)="creditTransfer = true" class="blue text-uppercase"
+                  >Make a payment on your credit card</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="text pay-credit" *ngIf="creditTransfer">
+            <h5>Make a payment on your credit card</h5>
+            <div class="mb-3 mt-4">
+              <input
+                type="number"
+                [(ngModel)]="creditAmt"
+                placeholder="Enter amount"
+              />
+            </div>
+            <div class="btn-group">
+              <button
+                type="reset"
+                class="cta rest"
+                (click)="creditTransfer = false"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                class="cta blue"
+                (click)="doCreditTransfer()"
+              >
+                Make Payment
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-warning-modals></app-warning-modals>
+
+<footer class="footer">
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="nav-bottom">
+            <ul>
+              <li><a routerLink="/nav/money-modules">MONEY MODULES</a></li>
+              <li><a routerLink="/help">HELP</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="logo">
+            <a href="index.html">
+              <img src="assets/images/credit-for-Life-logo.png" alt="" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="privacy">
+    We value the privacy of individuals who visit our website. Personal
+    information including name and email address, etc. is provided on a
+    voluntary basis only. We use this information to respond to inquiries and
+    requests for further information. We do not share or sell the personal
+    information you provide us to a third party at any time.
+  </div>
+</footer>

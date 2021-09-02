@@ -1,0 +1,55 @@
+<div class="admin-table">
+    <div class="container-fluid">
+        <table id="data-tables" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Organization</th>
+                    <th>Person</th>
+                    <th>Email</th>
+                    <th>Street</th>
+                    <th>State</th>
+                    <th>Zip</th>
+                    <th>School Code</th>
+                    <th>Comment</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let p of participantArray">
+                    <td>{{p.organizationName}}</td>
+                    <td>{{p.contactPerson}}</td>
+                    <td>{{p.email}}</td>
+                    <td>{{p.street}}</td>
+                    <td>{{p.state}}</td>
+                    <td>{{p.zip}}</td>
+                    <td>{{p.schoolCode}}</td>
+                    <td> {{p.comments}}</td>
+                    <td>
+                        <div class="btn-group btn-group-sm">
+                            <button class="btn btn-primary" [disabled]="p.isApproved"
+                                (click)="approveParticipant(p)">{{p.isApproved?'Approved':'Approve'}}</button>
+                            <button class="btn btn-success" routerLink="{{ p._id }}/report">
+                                Generate Report
+                            </button>
+                            <button class="btn btn-danger" (click)="deleteParticipant(p._id)">
+                                <i class="far fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </td>
+
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Organization</th>
+                    <th>Person</th>
+                    <th>Email</th>
+                    <th>Street</th>
+                    <th>State</th>
+                    <th>Zip</th>
+                    <th>Comment</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,456 @@
+<nav class="navbar navbar-expand-xl navbar-light site-nav home">
+  <div class="container-fluid align-items-center pr-3">
+    <!-- <a class="navbar-brand" href="index.html"><img src="assets/images/logo.png" alt=""></a> -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#main-nav"
+      aria-controls="main-nav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="main-nav">
+      <ul class="navbar-nav ml-auto home">
+        <li class="link-bg login-home">
+          <a routerLink="/student-login">LOGIN</a>
+        </li>
+        <li class="link-bg student-reg">
+          <a routerLink="/student-registration">STUDENT REGISTRATION</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<section class="banner home">
+  <div class="container">
+    <div class="logo">
+      <a href="#">
+        <img src="assets/images/creditforlife-logo.png" alt="logo" />
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="home-banner">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7">
+        <div class="text">
+          <h3>
+            Welcome to <br />
+            Credit for Life!
+          </h3>
+          <p>
+            You are a 25-year-old adult with <br />
+            a career, a salary, a savings <br />
+            account and a credit score. How <br />
+            well can you manage your budget <br />
+            and live the life you want to live?
+          </p>
+        </div>
+      </div>
+      <div class="col-md-5"></div>
+    </div>
+  </div>
+</section>
+<section class="home-boy-book">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="boy-book">
+          <img src="assets/images/books_boy_reading.svg" alt="boybooks" />
+        </div>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
+    <div class="text">
+      <p>
+        For more than a decade, high school students across Massachusetts and
+        beyond have participated in Credit for Life Fairs where students learn
+        the real-life budgeting and money management skills they will use
+        throughout their lifetime. Thanks to the efforts and support of a number
+        of banks and non-profit organizations, Credit for Life is now available
+        through this interactive website so that Massachusetts’ young adults can
+        enjoy these important financial lessons without leaving their desks or
+        classrooms. Participants choose their professions, are assigned monthly
+        take-home salaries and then navigate 10 online checkpoints to make
+        "purchases" utilizing imaginary cash, credit or savings. The experience
+        also includes a library of “Money Modules” students can utilize before
+        or after the Fair on topics that include budgeting, credit scores,
+        investing for the future and more.
+        <b>The goal? To learn to live within their budget.</b>
+      </p>
+      <div class="more_btn">
+        <a href="#">LEARN MORE </a>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="home-video">
+  <div class="container">
+    <div class="video-cover">
+      <video width="100%" height="520" controls>
+        <source
+          src="assets/images/credit_for_life_promo_1080p.mp4"
+          type="video/mp4"
+        />
+        <source src="movie.ogg" type="video/ogg" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+</section>
+
+<section class="you-know">
+  <div class="container">
+    <div class="head">
+      <h3>Did You Know?</h3>
+    </div>
+    <div class="three-steps">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="text">
+            <h4>86%</h4>
+            <p>
+              of high school students say the most important skill they need
+              post-graduation is understanding personal finance; only 30%
+              believe their schools are preparing them.
+
+              <span> (Barr Foundation 2019)</span>
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="text bg">
+            <div class="box">
+              <h4>YOUNG ADULTS</h4>
+              <p>
+                who receive financial education are less likely to carry credit
+                card debt, and more likely to apply to and receive college
+                grants and financial aid.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="text">
+            <h4>1 in 5</h4>
+            <p>
+              American 15-year-olds doesn’t understand basic financial concepts.
+              Students with a bank account scored on average 42 points higher
+              than those students who do not.
+
+              <span>(National Center for Education Statistics)</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="participate-form">
+  <div class="container">
+    <ul class="d-flex flex-row justify-content-around">
+      <li class="link-bg login-home col-md-4 d-flex align-items-center justify-content-center">
+        <a routerLink="/student-login">STUDENT LOGIN</a>
+      </li>
+      <li class="link-bg student-reg col-md-4 d-flex align-items-center justify-content-center">
+        <a routerLink="/student-registration">STUDENT REGISTRATION</a>
+      </li>
+    </ul>
+    <div class="register">
+      <div class="text">
+        <h3>Host a Fair</h3>
+        <p>
+          If you would like more information on how to participate in this
+          experience, please complete the form below.
+        </p>
+        <div class="register-form">
+          <form [formGroup]="participantForm">
+            <div class="form-group">
+              <label for="orgname">Organization Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="orgname"
+                formControlName="organizationName"
+              />
+            </div>
+            <div
+              *ngIf="
+                f.organizationName.errors &&
+                (f.organizationName.dirty || f.organizationName.touched)
+              "
+              class="validationError"
+            >
+              <div *ngIf="f.organizationName.errors.required">
+                Organization Name is required
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="person">Contact Person:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="person"
+                formControlName="contactPerson"
+              />
+            </div>
+            <div
+              *ngIf="
+                f.contactPerson.errors &&
+                (f.contactPerson.dirty || f.contactPerson.touched)
+              "
+              class="validationError"
+            >
+              <div *ngIf="f.contactPerson.errors.required">
+                Person Name is required
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="title">Title:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="title"
+                formControlName="title"
+              />
+            </div>
+            <div
+              *ngIf="f.title.errors && (f.title.dirty || f.title.touched)"
+              class="validationError"
+            >
+              <div *ngIf="f.title.errors.required">Title is required</div>
+            </div>
+
+            <div class="form-group">
+              <label for="street">Street:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="street"
+                formControlName="street"
+              />
+            </div>
+            <div
+              *ngIf="f.street.errors && (f.street.dirty || f.street.touched)"
+              class="validationError"
+            >
+              <div *ngIf="f.street.errors.required">Street is required</div>
+            </div>
+            <div class="form-group">
+              <label for="city">City:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="city"
+                formControlName="city"
+              />
+            </div>
+            <div
+              *ngIf="f.city.errors && (f.city.dirty || f.city.touched)"
+              class="validationError"
+            >
+              <div *ngIf="f.city.errors.required">City is required</div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-md-8">
+                <label for="state">State:</label>
+                <input
+                  type="state"
+                  class="form-control"
+                  id="state"
+                  formControlName="state"
+                />
+              </div>
+              <div
+                *ngIf="f.state.errors && (f.state.dirty || f.state.touched)"
+                class="validationError"
+              >
+                <div *ngIf="f.state.errors.required">State is required</div>
+              </div>
+
+              <div class="col-md-4">
+                <label for="zip">Zip:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="zip"
+                  formControlName="zip"
+                />
+              </div>
+              <div
+                *ngIf="f.zip.errors && (f.zip.dirty || f.zip.touched)"
+                class="validationError"
+              >
+                <div *ngIf="f.zip.errors.required">Zip is required</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                formControlName="email"
+              />
+            </div>
+            <div
+              *ngIf="f.email.errors && (f.email.dirty || f.email.touched)"
+              class="validationError"
+            >
+              <div *ngIf="f.email.errors.required">Email is required</div>
+            </div>
+
+            <div class="form-group">
+              <label for="comment">Comments:</label>
+              <textarea
+                class="form-control"
+                id="comment"
+                rows="8"
+                formControlName="comments"
+              ></textarea>
+            </div>
+            <div
+              *ngIf="
+                f.comments.errors && (f.comments.dirty || f.comments.touched)
+              "
+              class="validationError"
+            >
+              <div *ngIf="f.comments.errors.required">Comment is required</div>
+            </div>
+
+            <div class="register-btn">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="participantForm.invalid"
+                (click)="submitForm()"
+              >
+                SUBMIT
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sponsors">
+  <div class="heading">
+    <div class="container">
+      <h3>MEET OUR FOUNDING PARTNERS</h3>
+    </div>
+  </div>
+  <div class="container">
+    <div class="sponsors-list">
+      <ul>
+        <li>
+          <a href="#">
+            <div class="logo">
+              <img src="assets/images/spons-logo1.jpg" alt="logo" />
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <div class="logo">
+              <img src="assets/images/spons-logo9.jpg" alt="logo" />
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <div class="logo">
+              <img src="assets/images/spons-logo2.jpg" alt="logo" />
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <a href="#">
+            <div class="logo">
+              <img src="assets/images/spons-logo4.jpg" alt="logo" />
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <div class="logo">
+              <img src="assets/images/spons-logo5.jpg" alt="logo" />
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <div class="logo">
+              <img src="assets/images/spons-logo6.jpg" alt="logo" />
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <div class="logo">
+              <img src="assets/images/spons-logo7.jpg" alt="logo" />
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <a href="#">
+            <div class="logo">
+              <img src="assets/images/thesavings-bank.png" alt="logo" />
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <div class="logo">
+              <img src="assets/images/westfield_logo2.png" alt="logo" />
+            </div>
+          </a>
+        </li>
+      </ul>
+      <div class="contact_btn">
+        <a href="#">CONTACT US </a>
+      </div>
+    </div>
+  </div>
+</section>
+<footer class="footer">
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="nav-bottom">
+            <ul>
+              <li><a routerLink="/money-modules">MONEY MODULES</a></li>
+              <li><a routerLink="/help">HELP</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="logo">
+            <a href="index.html">
+              <img src="assets/images/credit-for-Life-logo.png" alt="" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="privacy">
+    We value the privacy of individuals who visit our website. Personal
+    information including name and email address, etc. is provided on a voluntary
+    basis only. We use this information to respond to inquiries and requests for
+    further information. We do not share or sell the personal information you
+    provide us to a third party at any time.
+  </div>
+</footer>

@@ -1,0 +1,94 @@
+<!-- checking below 500 -->
+
+<div class="life-happens-modal" *ngIf="user" >
+    <div class="modal fade show" id="creditscore" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="true"
+        [ngStyle]="{display: (!user?.warningStatus?.checkingBelow500) && isCheckingBelow500 ? 'block' : 'none'}">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeChecking()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <div class="identity-image">
+                            <img src="assets/images/explosion_checking_below-500.gif" alt="Identitytheft" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- savings below 500 -->
+<div class="life-happens-modal" *ngIf="user">
+    <div class="modal fade show" id="creditscore" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="true"
+    [ngStyle]="{display: (!user?.warningStatus?.savingsBelow500) && isSavingsBelow500 ? 'block':'none'}">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeSaving()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <div class="identity-image">
+                            <img src="assets/images/xxplosion_below-500.gif" alt="Identitytheft" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- over reliance on credit card -->
+<div class="life-happens-modal" *ngIf="user">
+    <div class="modal fade show" id="creditscore" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="true"
+    [ngStyle]="{display: (!user?.warningStatus?.creditOverReliance) && isCreditOverUsed ? 'block':'none'}">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeCreditOveruse()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <div class="identity-image">
+                            <img src="assets/images/explosion_over-reliance2.gif" alt="Identitytheft" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- credit card 30 percent -->
+<div class="life-happens-modal" *ngIf="user">
+    <div class="modal fade show" id="creditscore" tabindex="-1" role="dialog" aria-labelledby="title" aria-hidden="true"
+    [ngStyle]="{display: (!user?.warningStatus?.creditLeft30) && isCredit30 ? 'block':'none'}">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeCredit30()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text">
+                        <div class="identity-image">
+                            <img src="assets/images/explosion_30.gif" alt="Identitytheft" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

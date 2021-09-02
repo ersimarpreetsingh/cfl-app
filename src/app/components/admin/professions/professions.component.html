@@ -1,0 +1,77 @@
+<div class="admin-table">
+  <div class="container-fluid">
+    <div class="d-flex flex-row justify-content-end">
+      <button type="button" class="btn btn-success" routerLink="new">
+        Add New Category
+      </button>
+    </div>
+
+    <div id="accordion">
+      <div class="card" *ngFor="let category of categories; let i = index">
+        <div class="card-header d-flex flex-row justify-content-between" id="heading{{ i }}">
+          <h5 class="mb-0">
+            <button
+              class="btn btn-link"
+              data-toggle="collapse"
+              [attr.data-target]="'#collapse' + i"
+              aria-expanded="true"
+              [attr.aria-controls]="'collapse' + i"
+            >
+              {{ category.name }}
+            </button>
+            
+          </h5>
+          <div class="btn-group btn-group-sm">
+            <button class="btn btn-primary" routerLink="{{category._id}}"><i class="far fa-edit"></i></button>
+            <!-- <button class="btn btn-danger">
+              <i class="far fa-trash-alt"></i>
+            </button> -->
+        </div>
+        </div>
+
+        <div
+          id="collapse{{ i }}"
+          class="collapse"
+          aria-labelledby="headingOne"
+          data-parent="#accordion"
+        >
+          <div class="card-body">
+            <div class="d-flex flex-row justify-content-between">
+              <h3>Profession</h3>
+              <button
+                type="button"
+                class="btn btn-success"
+                routerLink="{{ category._id }}/profession/new"
+              >
+                Add New Profession
+              </button>
+            </div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th colspan="2">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let profession of category.professions">
+                  <td>{{ profession.name }}</td>
+                  <td>
+                    <button class="btn btn-primary" routerLink="{{ category._id }}/profession/{{profession._id}}">
+                      <i class="far fa-edit"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <button class="btn btn-danger" (click)="deleteProfession(profession._id)">
+                      <i class="far fa-trash-alt"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

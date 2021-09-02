@@ -1,0 +1,10 @@
+#choose-avatar {
+    li {
+        &.selected {
+            border: 2px solid #0A2463;
+        }
+        &:hover {
+            border: 2px solid #0A2463;
+        }
+    }
+}

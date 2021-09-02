@@ -1,0 +1,38 @@
+<div class="admin-table">
+  <div class="container-fluid">
+    <table id="data-tables" class="display" style="width: 100%">
+      <thead>
+        <tr>
+          <th>SchoolCode</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let st of studentArray">
+          <td>{{ st.schoolCode }}</td>
+          <td>{{ st.email }}</td>
+          <td>{{ st.role }}</td>
+          <td>
+            <div class="btn-group btn-group-sm">
+              <!-- <button class="btn btn-primary" routerLink="{{ checkpoint._id }}">
+                              <i class="far fa-edit"></i>
+                            </button> -->
+              <button class="btn btn-danger" (click)="deleteStudent(st._id)" >
+                <i class="far fa-trash-alt"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th>SchoolCode</th>
+          <th>Email</th>
+          <th>Role</th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
