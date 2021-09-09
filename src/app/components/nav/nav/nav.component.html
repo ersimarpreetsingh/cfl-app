@@ -39,8 +39,8 @@
             <span>${{ user.creditCard | formatPrice }}</span></a
           >
         </li>
-        <li class="link-bg">
-          <a routerLink="profile" class="profile">PROFILE</a>
+        <li class="link-bg" (click)="routeToProfile()">
+          <a class="profile">PROFILE</a>
         </li>
         <li class="link-bg">
           <a href="#" class="help">HELP</a>
@@ -52,7 +52,7 @@
 <section class="banner">
   <div class="container">
     <form class="form" [ngStyle]="{ display: alldone ? 'none' : 'flex' }">
-      <div class="inputGroup" *ngFor="let checkpoint of checkpoints">
+      <div class="inputGroup" *ngFor="let checkpoint of checkpoints" (click)="routeToCheckpoint($event, checkpoint._id)">
         <input
           id="{{ checkpoint._id }}"
           name="check"
@@ -61,7 +61,7 @@
           (click)="clickCheckbox($event)"
         />
         <label for="{{ checkpoint._id }}">
-          <a routerLink="checkpoint/{{ checkpoint._id }}" href="/nav/checkpoint/{{checkpoint._id}}">{{
+          <a>{{
             checkpoint.title
           }}</a></label
         >

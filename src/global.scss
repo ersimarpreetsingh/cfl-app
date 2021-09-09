@@ -26,6 +26,9 @@
 @import "~@ionic/angular/css/flex-utils.css";
 body {
     ion-app.ion-page{
+        &.ios {
+            margin-top: 32px;
+        }
         .ion-page{
             overflow-y: auto;
         }

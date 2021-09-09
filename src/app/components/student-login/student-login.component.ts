@@ -1,5 +1,5 @@
 import { SnackbarService } from './../../services/snackbar.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Validators, FormGroup, FormBuilder, FormControl, AbstractControl } from '@angular/forms';
 import { AuthApiService } from '../../api/auth-api.service';
 import { AppService } from '../../api/app.service';
@@ -26,14 +26,20 @@ export class StudentLoginComponent implements OnInit, OnDestroy {
     private snackbar: SnackbarService
   ) {
   }
-
+  ngOnDestroy(): void {
+    this.unsubscribeAll.next();
+    this.unsubscribeAll.complete();
+    console.log('ondestroy');
+  }
   ngOnInit(): void {
     this.appService$.getUserListener().pipe(takeUntil(this.unsubscribeAll)).subscribe(res => {
       if (res.profession) {
+        console.log("again");
         this.router.navigateByUrl('nav/profile');
       } else {
         this.router.navigateByUrl('nav/professions');
       }
+      this.ngOnDestroy();
     });
   }
 
@@ -43,7 +49,7 @@ export class StudentLoginComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     if (this.studentLoginForm.valid) {
-      this.authApiService$.studentlogin(this.studentLoginForm.value).subscribe(rlt => {
+      this.authApiService$.studentlogin(this.studentLoginForm.value).pipe(takeUntil(this.unsubscribeAll)).subscribe(rlt => {
         if (rlt.success) {
           const token: AuthTokens = { accessToken: rlt.data.accessToken, refreshToken: rlt.data.refreshToken };
           this.authApiService$.setTokens(token);
@@ -58,10 +64,4 @@ export class StudentLoginComponent implements OnInit, OnDestroy {
       console.log(this.studentLoginForm.errors);
     }
   }
-
-  ngOnDestroy(): void {
-    this.unsubscribeAll.next();
-    this.unsubscribeAll.complete();
-  }
-
 }
