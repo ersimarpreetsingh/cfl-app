@@ -30,4 +30,17 @@ body {
             overflow-y: auto;
         }
     }
+    // .modal-backdrop.show {
+    //     z-index: 1000 !important;
+    // }
+    &.modal-open{
+        .modal{
+            background: rgba(#000, 0.5);
+        }
+    }
+    .modal-backdrop {
+        /* bug fix - no overlay */    
+        display: none;    
+    }
+    
 }

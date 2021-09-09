@@ -207,13 +207,12 @@
         </div>
         <div class="modal-body">
           <div class="text">
-            <ul>
+            <ul class="row">
               <li
                 *ngFor="let avatar of avatars"
                 data-dismiss="modal"
                 [ngClass]="{ selected: avatar.selected }"
-                (click)="selectAvatar(avatar.id)"
-              >
+                (click)="selectAvatar(avatar.id)" class="col-6 col-md-3 col-sm-4">
                 <a>
                   <img src="{{ avatar.imageUrl }}" alt="avatar" />
                 </a>
