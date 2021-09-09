@@ -5,7 +5,7 @@ import { LifeEventService } from './../../../api/life-event.service';
 import { CheckpointService } from './../../../api/checkpoint.service';
 import { Checkpoint, LifeEvent } from 'src/app/models';
 import { AppService } from './../../../api/app.service';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
 import domtoimage from 'dom-to-image';
@@ -34,6 +34,7 @@ export class NavComponent implements OnInit {
     private router: Router,
     private clipboard: ClipboardService,
     private snackbar: SnackbarService,
+    private cdr: ChangeDetectorRef
   ) {
   }
 
@@ -50,6 +51,7 @@ export class NavComponent implements OnInit {
             checkpoint.completed = this.user?.transactions.findIndex((trans: any) => trans.checkPoint?._id === checkpoint._id) > -1 ||
               this.user.profession.grossAnnualSalary >= 45000 && checkpoint.title === 'Part-time Jobs';
           }
+          this.cdr.detectChanges();
         });
         this.alldone = !(this.checkpoints.findIndex(checkpoint => !checkpoint.completed) > -1);
       }
@@ -58,6 +60,11 @@ export class NavComponent implements OnInit {
     this.appApi.userDetail();
     this.checkpointApi.getCheckpoints();
     this.lifeEventApi.getLifeEvents();
+  }
+
+  routeToCheckpoint(event: Event, checkpointId: string) {
+    event.stopPropagation();
+    this.router.navigateByUrl(`/nav/checkpoint/${checkpointId}`);
   }
 
   routeToProfile(): void {
