@@ -1,85 +1,72 @@
-<section
-  class="review-sec"
-  [ngStyle]="{ display: !alldone ? 'none' : 'block' }"
->
-  <div class="container">
-    <div class="text">
-      <p *ngIf="sharableLink && sharableLink.length > 0" >
-        <b>Public Link: </b>{{sharableLink}}
-      </p>
-      <h3>Budget Review</h3>
-      <p>
-        <b>Congratulations!</b> You’ve completed all the checkpoints. Now let’s
-        talk about your choices.
-      </p>
+<section class="review-sec" [ngStyle]="{ display: !alldone ? 'none' : 'block' }">
+    <div class="container">
+        <div class="text">
+            <p *ngIf="sharableLink && sharableLink.length > 0">
+                <b>Public Link: </b>{{sharableLink}}
+            </p>
+            <h3>Budget Review</h3>
+            <p>
+                <b>Congratulations!</b> You’ve completed all the checkpoints. Now let’s talk about your choices.
+            </p>
+        </div>
+        <div id="chat-container" style="height: 500px"></div>
     </div>
-    <div id="chat-container" style="height: 500px"></div>
-  </div>
 </section>
 <div id="print-section">
-  <section class="profile-banner">
-    <div class="container">
-      <div class="profile">
-        <div class="row">
-          <div class="col-md-3">
-            <div class="user-image">
-              <img src="{{ user?.imageUrl }}" alt="chris-smith" />
-            </div>
-          </div>
-          <div class="col-md-9">
-            <div class="text">
-              <h1>{{ user?.firstName }} {{ user?.lastName }}</h1>
-              <p><b>School:</b> {{ user?.school?.organizationName }}</p>
-              <p><b>Occupation:</b> {{ user?.profession?.name }}</p>
-              <p><b>Credit Score:</b> {{ user?.creditScore }}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="loans-summary" style="margin-bottom: 40px">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8">
-          <div class="my-salary">
-            <div class="heading">
-              <h4>MY SALARY</h4>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="annual-salary">
-                  <div class="text">
-                    <h3>ANNUAL SALARY</h3>
-                    <p>
-                      ${{ user?.profession?.grossAnnualSalary | formatPrice }}
-                    </p>
-                  </div>
-                  <div class="text mt-4">
-                    <h3>
-                      MONTHLY TAKE <br />
-                      HOME PAY
-                    </h3>
-                    <p>
-                      ${{
-                        (user?.profession?.grossAnnualSalary -
-                          (user?.profession?.federalTax +
-                            user?.profession?.MATax +
-                            user?.profession?.medicare +
-                            user?.profession?.socSec)) /
-                          12 | formatPrice
-                      }}
-                    </p>
-                  </div>
+    <section class="profile-banner">
+        <div class="container">
+            <div class="profile">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="user-image text-center">
+                            <img src="{{ user?.imageUrl }}" alt="chris-smith" />
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="text">
+                            <h1>{{ user?.firstName }} {{ user?.lastName }}</h1>
+                            <p><b>School:</b> {{ user?.school?.organizationName }}</p>
+                            <p><b>Occupation:</b> {{ user?.profession?.name }}</p>
+                            <p><b>Credit Score:</b> {{ user?.creditScore }}</p>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="col-md-6">
-                <div class="gross-salary">
-                  <div class="text">
-                    <h3>
-                      GROSS MONTHLY SALARY:
-                      <span
-                        >${{
+            </div>
+        </div>
+    </section>
+    <section class="loans-summary" style="margin-bottom: 40px">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="my-salary">
+                        <div class="heading">
+                            <h4>MY SALARY</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="annual-salary">
+                                    <div class="text">
+                                        <h3>ANNUAL SALARY</h3>
+                                        <p>
+                                            ${{ user?.profession?.grossAnnualSalary | formatPrice }}
+                                        </p>
+                                    </div>
+                                    <div class="text mt-4">
+                                        <h3>
+                                            MONTHLY TAKE <br /> HOME PAY
+                                        </h3>
+                                        <p>
+                                            ${{ (user?.profession?.grossAnnualSalary - (user?.profession?.federalTax + user?.profession?.MATax + user?.profession?.medicare + user?.profession?.socSec)) / 12 | formatPrice }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="gross-salary">
+                                    <div class="text">
+                                        <h3>
+                                            GROSS MONTHLY SALARY:
+                                            <span>${{
                           user?.profession?.grossAnnualSalary / 12 | formatPrice
                         }}</span
                       >
@@ -96,10 +83,10 @@
                     <h4>
                       State tax:
                       <span> ${{ user?.profession?.MATax | formatPrice }}</span>
-                    </h4>
-                    <h4>
-                      Medicare:
-                      <span>
+                                            </h4>
+                                            <h4>
+                                                Medicare:
+                                                <span>
                         ${{ user?.profession?.medicare | formatPrice }}</span
                       >
                     </h4>
@@ -164,297 +151,247 @@
                 <p>
                   BEGINING BALANCE:
                   <span>${{ user?.begCheckingAcc | formatPrice }}</span>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-xl-3 mt-3 mt-md-0">
-            <div class="check-account yellow">
-              <div class="heading">
-                <h4>SAVINGS ACCOUNT BALANCE</h4>
-              </div>
-              <div class="text">
-                <h3>REMAINING BALANCE</h3>
-                <h4>${{ user?.savingAcc | formatPrice }}</h4>
-                <p>
-                  BEGINING BALANCE:
-                  <span>${{ user?.begSavingAcc | formatPrice }}</span>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-xl-3 mt-3 mt-md-4 mt-xl-0">
-            <div class="check-account yellow">
-              <div class="heading">
-                <h4>RETIREMENT ACCOUNT BALANCE</h4>
-              </div>
-              <div class="text">
-                <h3>CURRENT BALANCE</h3>
-                <h4>${{ user?.retirementAcc | formatPrice }}</h4>
-                <p>
-                  BEGINING BALANCE:
-                  <span>${{ user?.begRetirementAcc | formatPrice }}</span>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-xl-3 mt-3 mt-md-4 mt-xl-0">
-            <div class="check-account orange">
-              <div class="heading">
-                <h4>CREDIT CARD<br class="d-xl-block d-none"> BALANCE</h4>
-              </div>
-              <div class="text">
-                <h3>Total Balance</h3>
-                <h4>${{ user?.creditCard | formatPrice }}</h4>
-                <p>
-                  CREDIT CARD LIMIT:
-                  <span>${{ user?.creditCardLimit | formatPrice }}</span>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-<div class="transfer">
-<div class="row">
-  <div class="col title"><h2>Transfer Money</h2></div>
-  <div class="col-md-3 select">
-    <select [(ngModel)]="transferType" class="money">
+                                                </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xl-3 mt-3 mt-md-0">
+                                <div class="check-account yellow">
+                                    <div class="heading">
+                                        <h4>SAVINGS ACCOUNT BALANCE</h4>
+                                    </div>
+                                    <div class="text">
+                                        <h3>REMAINING BALANCE</h3>
+                                        <h4>${{ user?.savingAcc | formatPrice }}</h4>
+                                        <p>
+                                            BEGINING BALANCE:
+                                            <span>${{ user?.begSavingAcc | formatPrice }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xl-3 mt-3 mt-md-4 mt-xl-0">
+                                <div class="check-account yellow">
+                                    <div class="heading">
+                                        <h4>RETIREMENT ACCOUNT BALANCE</h4>
+                                    </div>
+                                    <div class="text">
+                                        <h3>CURRENT BALANCE</h3>
+                                        <h4>${{ user?.retirementAcc | formatPrice }}</h4>
+                                        <p>
+                                            BEGINING BALANCE:
+                                            <span>${{ user?.begRetirementAcc | formatPrice }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xl-3 mt-3 mt-md-4 mt-xl-0">
+                                <div class="check-account orange">
+                                    <div class="heading">
+                                        <h4>CREDIT CARD<br class="d-xl-block d-none"> BALANCE</h4>
+                                    </div>
+                                    <div class="text">
+                                        <h3>Total Balance</h3>
+                                        <h4>${{ user?.creditCard | formatPrice }}</h4>
+                                        <p>
+                                            CREDIT CARD LIMIT:
+                                            <span>${{ user?.creditCardLimit | formatPrice }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="transfer">
+                        <div class="row">
+                            <div class="col title">
+                                <h2>Transfer Money</h2>
+                            </div>
+                            <div class="col-md-3 select">
+                                <select [(ngModel)]="transferType" class="money">
       <option value="">Select Transfer Type</option>
       <option value="S2C">Savings to Checking</option>
       <option value="C2S">Checking to Saving </option>
     </select>
-  </div>
-  <div class="col-md-6 amount">
-    <input type="text" [(ngModel)]="transferAmt"  placeholder="Amount">
-    <button (click)="transfer()" [ngClass]="{'disabled': transferAmt < 1 || transferType.length < 1}" [disabled]="transferAmt < 1 || transferType.length < 1">Transfer</button>
-  </div>
-</div>
-</div>
-      <div class="table-sec">
-        <div class="heading">
-          <h4>CHECKING ACCOUNT</h4>
-        </div>
+                            </div>
+                            <div class="col-md-6 amount">
+                                <input type="text" [(ngModel)]="transferAmt" placeholder="Amount">
+                                <button (click)="transfer()" [ngClass]="{'disabled': transferAmt < 1 || transferType.length < 1}" [disabled]="transferAmt < 1 || transferType.length < 1">Transfer</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-sec">
+                        <div class="heading">
+                            <h4>CHECKING ACCOUNT</h4>
+                        </div>
 
-        <div class="table-responsive">
-          <!--Table-->
-          <table class="table table-striped">
-            <!--Table head-->
-            <thead>
-              <tr>
-                <th class="th-sm">TRANSACTION</th>
-                <th class="th-sm">CHECKPOINT</th>
-                <th class="th-sm">COST (-)</th>
-                <th class="th-sm">DEPOSIT (+)</th>
-                <th class="th-sm">REMOVE</th>
-              </tr>
-            </thead>
-            <!--Table head-->
+                        <div class="table-responsive">
+                            <!--Table-->
+                            <table class="table table-striped">
+                                <!--Table head-->
+                                <thead>
+                                    <tr>
+                                        <th class="th-sm">TRANSACTION</th>
+                                        <th class="th-sm">CHECKPOINT</th>
+                                        <th class="th-sm">COST (-)</th>
+                                        <th class="th-sm">DEPOSIT (+)</th>
+                                        <th class="th-sm">REMOVE</th>
+                                    </tr>
+                                </thead>
+                                <!--Table head-->
 
-            <!--Table body-->
-            <tbody>
-              <tr *ngFor="let transaction of checkingAccTransactions">
-                <th scope="row">
-                  {{
-                    transaction.title
-                      ? transaction.title
-                      : transaction.package.title
-                  }}
-                </th>
-                <td>
-                  {{
-                    transaction?.checkPoint
-                      ? transaction?.checkPoint.title
-                      : transaction.lifeEvent?.title
-                  }}
-                </td>
-                <td>
-                  {{ transaction.debitFrom === "CA" ? "-$" : ""
-                  }}{{
-                    (transaction.debitFrom === "CA" ? +transaction.cost : "")
-                      | formatPrice
-                  }}
-                </td>
-                <td>
-                  {{ transaction.creditTo === "CA" ? "$" : ""
-                  }}{{
-                    (transaction.creditTo === "CA" ? transaction.cost : "")
-                      | formatPrice
-                  }}
-                </td>
-                <td>
-                  <button *ngIf="transaction?.package"  class="btn btn-danger" (click)="deleteTransaction(transaction._id)" >DELETE</button>
-                </td>
-              </tr>
-            </tbody>
-            <!--Table body-->
-          </table>
-          <!--Table-->
-        </div>
-      </div>
+                                <!--Table body-->
+                                <tbody>
+                                    <tr *ngFor="let transaction of checkingAccTransactions">
+                                        <th scope="row">
+                                            {{ transaction.title ? transaction.title : transaction.package.title }}
+                                        </th>
+                                        <td>
+                                            {{ transaction?.checkPoint ? transaction?.checkPoint.title : transaction.lifeEvent?.title }}
+                                        </td>
+                                        <td>
+                                            {{ transaction.debitFrom === "CA" ? "-$" : "" }}{{ (transaction.debitFrom === "CA" ? +transaction.cost : "") | formatPrice }}
+                                        </td>
+                                        <td>
+                                            {{ transaction.creditTo === "CA" ? "$" : "" }}{{ (transaction.creditTo === "CA" ? transaction.cost : "") | formatPrice }}
+                                        </td>
+                                        <td>
+                                            <button *ngIf="transaction?.package" class="btn btn-danger" (click)="deleteTransaction(transaction._id)">DELETE</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <!--Table body-->
+                            </table>
+                            <!--Table-->
+                        </div>
+                    </div>
 
-      <div class="table-sec">
-        <div class="heading">
-          <h4>SAVINGS ACCOUNT</h4>
-        </div>
+                    <div class="table-sec">
+                        <div class="heading">
+                            <h4>SAVINGS ACCOUNT</h4>
+                        </div>
 
-        <div class="table-responsive">
-          <!--Table-->
-          <table class="table table-striped">
-            <!--Table head-->
-            <thead>
-              <tr>
-                <th class="th-sm">TRANSACTION</th>
-                <th class="th-sm">CHECKPOINT</th>
-                <th class="th-sm">PAYMENT (-)</th>
-                <th class="th-sm">DEPOSITS (+)</th>
-                <th class="th-sm">REMOVE</th>
-              </tr>
-            </thead>
-            <!--Table head-->
+                        <div class="table-responsive">
+                            <!--Table-->
+                            <table class="table table-striped">
+                                <!--Table head-->
+                                <thead>
+                                    <tr>
+                                        <th class="th-sm">TRANSACTION</th>
+                                        <th class="th-sm">CHECKPOINT</th>
+                                        <th class="th-sm">PAYMENT (-)</th>
+                                        <th class="th-sm">DEPOSITS (+)</th>
+                                        <th class="th-sm">REMOVE</th>
+                                    </tr>
+                                </thead>
+                                <!--Table head-->
 
-            <!--Table body-->
-            <tbody>
-              <tr *ngFor="let transaction of savingAccTransactions">
-                <th scope="row">
-                  {{
-                    transaction.title
-                      ? transaction.title
-                      : transaction.package.title
-                  }}
-                </th>
-                <td>
-                  {{
-                    transaction?.checkPoint
-                      ? transaction?.checkPoint.title
-                      : transaction.lifeEvent?.title
-                  }}
-                </td>
-                <td>
-                  {{ transaction.debitFrom === "SA" ? "-$" : ""
-                  }}{{
-                    (transaction.debitFrom === "SA" ? transaction.cost : "")
-                      | formatPrice
-                  }}
-                </td>
-                <td>
-                  {{ transaction.creditTo === "SA" ? "$" : ""
-                  }}{{
-                    (transaction.creditTo === "SA" ? transaction.cost : "")
-                      | formatPrice
-                  }}
-                </td>
-                <td><button class="btn btn-danger" (click)="deleteTransaction(transaction._id)" >DELETE</button></td>
-              </tr>
-            </tbody>
-            <!--Table body-->
-          </table>
-          <!--Table-->
-        </div>
-      </div>
+                                <!--Table body-->
+                                <tbody>
+                                    <tr *ngFor="let transaction of savingAccTransactions">
+                                        <th scope="row">
+                                            {{ transaction.title ? transaction.title : transaction.package.title }}
+                                        </th>
+                                        <td>
+                                            {{ transaction?.checkPoint ? transaction?.checkPoint.title : transaction.lifeEvent?.title }}
+                                        </td>
+                                        <td>
+                                            {{ transaction.debitFrom === "SA" ? "-$" : "" }}{{ (transaction.debitFrom === "SA" ? transaction.cost : "") | formatPrice }}
+                                        </td>
+                                        <td>
+                                            {{ transaction.creditTo === "SA" ? "$" : "" }}{{ (transaction.creditTo === "SA" ? transaction.cost : "") | formatPrice }}
+                                        </td>
+                                        <td><button class="btn btn-danger" (click)="deleteTransaction(transaction._id)">DELETE</button></td>
+                                    </tr>
+                                </tbody>
+                                <!--Table body-->
+                            </table>
+                            <!--Table-->
+                        </div>
+                    </div>
 
 
-      <div class="table-sec">
-        <div class="heading">
-          <h4>RETIREMENT ACCOUNT</h4>
-        </div>
+                    <div class="table-sec">
+                        <div class="heading">
+                            <h4>RETIREMENT ACCOUNT</h4>
+                        </div>
 
-        <div class="table-responsive">
-          <!--Table-->
-          <table class="table table-striped">
-            <!--Table head-->
-            <thead>
-              <tr>
-                <th class="th-sm">TRANSACTION</th>
-                <th class="th-sm">CHECKPOINT</th>
-                <th class="th-sm">PAYMENT (-)</th>
-                <th class="th-sm">DEPOSITS (+)</th>
-                <th class="th-sm">REMOVE</th>
-              </tr>
-            </thead>
-            <!--Table head-->
+                        <div class="table-responsive">
+                            <!--Table-->
+                            <table class="table table-striped">
+                                <!--Table head-->
+                                <thead>
+                                    <tr>
+                                        <th class="th-sm">TRANSACTION</th>
+                                        <th class="th-sm">CHECKPOINT</th>
+                                        <th class="th-sm">PAYMENT (-)</th>
+                                        <th class="th-sm">DEPOSITS (+)</th>
+                                        <th class="th-sm">REMOVE</th>
+                                    </tr>
+                                </thead>
+                                <!--Table head-->
 
-            <!--Table body-->
-            <tbody>
-              <tr *ngFor="let transaction of retirementTransactions">
-                <th scope="row">
-                  {{
-                    transaction.title
-                      ? transaction.title
-                      : transaction.package.title
-                  }}
-                </th>
-                <td>
-                  {{
-                    transaction?.checkPoint
-                      ? transaction?.checkPoint.title
-                      : transaction.lifeEvent?.title
-                  }}
-                </td>
-                <td>
-                  {{ transaction.debitFrom === "RA" ? "-$" : ""
-                  }}{{
-                    (transaction.debitFrom === "RA" ? transaction.cost : "")
-                      | formatPrice
-                  }}
-                </td>
-                <td>
-                  {{ transaction.creditTo === "RA" ? "$" : ""
-                  }}{{
-                    (transaction.creditTo === "RA" ? transaction.cost : "")
-                      | formatPrice
-                  }}
-                </td>
-                <td><button class="btn btn-danger" (click)="deleteTransaction(transaction._id)" >DELETE</button></td>
-              </tr>
-            </tbody>
-            <!--Table body-->
-          </table>
-          <!--Table-->
-        </div>
-      </div>
+                                <!--Table body-->
+                                <tbody>
+                                    <tr *ngFor="let transaction of retirementTransactions">
+                                        <th scope="row">
+                                            {{ transaction.title ? transaction.title : transaction.package.title }}
+                                        </th>
+                                        <td>
+                                            {{ transaction?.checkPoint ? transaction?.checkPoint.title : transaction.lifeEvent?.title }}
+                                        </td>
+                                        <td>
+                                            {{ transaction.debitFrom === "RA" ? "-$" : "" }}{{ (transaction.debitFrom === "RA" ? transaction.cost : "") | formatPrice }}
+                                        </td>
+                                        <td>
+                                            {{ transaction.creditTo === "RA" ? "$" : "" }}{{ (transaction.creditTo === "RA" ? transaction.cost : "") | formatPrice }}
+                                        </td>
+                                        <td><button class="btn btn-danger" (click)="deleteTransaction(transaction._id)">DELETE</button></td>
+                                    </tr>
+                                </tbody>
+                                <!--Table body-->
+                            </table>
+                            <!--Table-->
+                        </div>
+                    </div>
 
 
-      <div class="table-sec">
-        <div class="heading">
-          <h4>CREDIT CARD BALANCE</h4>
-        </div>
+                    <div class="table-sec">
+                        <div class="heading">
+                            <h4>CREDIT CARD BALANCE</h4>
+                        </div>
 
-        <div class="table-responsive">
-          <!--Table-->
-          <table class="table table-striped">
-            <!--Table head-->
-            <thead>
-              <tr>
-                <th class="th-sm">TRANSACTION</th>
-                <th class="th-sm">CHECKPOINT</th>
-                <th class="th-sm">CHARGE (-)</th>
-                <th class="th-sm">REMOVE</th>
-              </tr>
-            </thead>
-            <!--Table head-->
+                        <div class="table-responsive">
+                            <!--Table-->
+                            <table class="table table-striped">
+                                <!--Table head-->
+                                <thead>
+                                    <tr>
+                                        <th class="th-sm">TRANSACTION</th>
+                                        <th class="th-sm">CHECKPOINT</th>
+                                        <th class="th-sm">CHARGE (-)</th>
+                                        <th class="th-sm">REMOVE</th>
+                                    </tr>
+                                </thead>
+                                <!--Table head-->
 
-            <!--Table body-->
-            <tbody>
-              <tr *ngFor="let transaction of ccTransactions">
-                <th scope="row">
-                  {{
-                    transaction.title
-                      ? transaction.title
-                      : transaction.package.title
-                  }}
-                </th>
-                <td>{{ transaction?.checkPoint?.title }}</td>
-                <td>${{ transaction?.cost | formatPrice }}</td>
-                <td><button class="btn btn-danger" (click)="deleteTransaction(transaction._id)" >DELETE</button></td>
+                                <!--Table body-->
+                                <tbody>
+                                    <tr *ngFor="let transaction of ccTransactions">
+                                        <th scope="row">
+                                            {{ transaction.title ? transaction.title : transaction.package.title }}
+                                        </th>
+                                        <td>{{ transaction?.checkPoint?.title }}</td>
+                                        <td>${{ transaction?.cost | formatPrice }}</td>
+                                        <td><button class="btn btn-danger" (click)="deleteTransaction(transaction._id)">DELETE</button></td>
 
-              </tr>
-            </tbody>
-            <!--Table body-->
-          </table>
-          <!--Table-->
-        </div>
-      </div>
+                                    </tr>
+                                </tbody>
+                                <!--Table body-->
+                            </table>
+                            <!--Table-->
+                        </div>
+                    </div>
+                </div>
+    </section>
     </div>
-  </section>
-</div>
