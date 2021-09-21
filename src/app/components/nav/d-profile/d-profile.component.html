@@ -56,7 +56,9 @@
                                             MONTHLY TAKE <br /> HOME PAY
                                         </h3>
                                         <p>
-                                            ${{ (user?.profession?.grossAnnualSalary - (user?.profession?.federalTax + user?.profession?.MATax + user?.profession?.medicare + user?.profession?.socSec)) / 12 | formatPrice }}
+                                            ${{ (user?.profession?.grossAnnualSalary - (user?.profession?.federalTax +
+                                            user?.profession?.MATax + user?.profession?.medicare +
+                                            user?.profession?.socSec)) / 12 | formatPrice }}
                                         </p>
                                     </div>
                                 </div>
@@ -67,331 +69,312 @@
                                         <h3>
                                             GROSS MONTHLY SALARY:
                                             <span>${{
-                          user?.profession?.grossAnnualSalary / 12 | formatPrice
-                        }}</span
-                      >
-                    </h3>
-                  </div>
-                  <div class="text mt-4">
-                    <h3>YEARLY WITHHOLDINGS</h3>
-                    <h4>
-                      Federal tax:
-                      <span>
-                        ${{ user?.profession?.federalTax | formatPrice }}</span
-                      >
-                    </h4>
-                    <h4>
-                      State tax:
-                      <span> ${{ user?.profession?.MATax | formatPrice }}</span>
-                                            </h4>
-                                            <h4>
-                                                Medicare:
-                                                <span>
-                        ${{ user?.profession?.medicare | formatPrice }}</span
-                      >
-                    </h4>
-                    <h4>
-                      Social Security:
-                      <span>
-                        ${{ user?.profession?.socSec | formatPrice }}</span
-                      >
-                    </h4>
-                    <h3>
-                      TOTAL TAX DEDUCTIONS:
-                      <span
-                        >${{
-                          user?.profession?.federalTax +
-                            user?.profession?.MATax +
-                            user?.profession?.medicare +
-                            user?.profession?.socSec | formatPrice
-                        }}</span
-                      >
-                    </h3>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="student-loans">
-            <div class="heading">
-              <h4>STUDENT LOANS</h4>
-            </div>
-            <div class="text">
-              <p>
-                Vist the Education & Training checkpoint to learn your monthly
-                student loan payment.
-              </p>
-            </div>
-          </div>
-          <div class="student-loans mt-4">
-            <div class="heading">
-              <h4>HEALTH INSURANCE</h4>
-            </div>
-            <div class="text">
-              <p>
-                Vist the Health & Wellness checkpoint to learn your monthly
-                health insurance payment.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="account-steps mb-0 mb-md-4">
-        <div class="row">
-          <div class="col-md-6 col-xl-3">
-            <div class="check-account">
-              <div class="heading">
-                <h4>CHECKING ACCOUNT BALANCE</h4>
-              </div>
-              <div class="text">
-                <h3>REMAINING BALANCE</h3>
-                <h4>${{ user?.checkingAcc | formatPrice }}</h4>
-                <p>
-                  BEGINING BALANCE:
-                  <span>${{ user?.begCheckingAcc | formatPrice }}</span>
-                                                </p>
+                                                user?.profession?.grossAnnualSalary / 12 | formatPrice
+                                                }}</span>
+                                        </h3>
+                                    </div>
+                                    <div class="text mt-4">
+                                        <h3>YEARLY WITHHOLDINGS</h3>
+                                        <h4>
+                                            Federal tax:
+                                            <span>
+                                                ${{ user?.profession?.federalTax | formatPrice }}</span>
+                                        </h4>
+                                        <h4>
+                                            State tax:
+                                            <span> ${{ user?.profession?.MATax | formatPrice }}</span>
+                                        </h4>
+                                        <h4>
+                                            Medicare:
+                                            <span>
+                                                ${{ user?.profession?.medicare | formatPrice }}</span>
+                                        </h4>
+                                        <h4>
+                                            Social Security:
+                                            <span>
+                                                ${{ user?.profession?.socSec | formatPrice }}</span>
+                                        </h4>
+                                        <h3>
+                                            TOTAL TAX DEDUCTIONS:
+                                            <span>${{
+                                                user?.profession?.federalTax +
+                                                user?.profession?.MATax +
+                                                user?.profession?.medicare +
+                                                user?.profession?.socSec | formatPrice
+                                                }}</span>
+                                        </h3>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-xl-3 mt-3 mt-md-0">
-                                <div class="check-account yellow">
-                                    <div class="heading">
-                                        <h4>SAVINGS ACCOUNT BALANCE</h4>
-                                    </div>
-                                    <div class="text">
-                                        <h3>REMAINING BALANCE</h3>
-                                        <h4>${{ user?.savingAcc | formatPrice }}</h4>
-                                        <p>
-                                            BEGINING BALANCE:
-                                            <span>${{ user?.begSavingAcc | formatPrice }}</span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-xl-3 mt-3 mt-md-4 mt-xl-0">
-                                <div class="check-account yellow">
-                                    <div class="heading">
-                                        <h4>RETIREMENT ACCOUNT BALANCE</h4>
-                                    </div>
-                                    <div class="text">
-                                        <h3>CURRENT BALANCE</h3>
-                                        <h4>${{ user?.retirementAcc | formatPrice }}</h4>
-                                        <p>
-                                            BEGINING BALANCE:
-                                            <span>${{ user?.begRetirementAcc | formatPrice }}</span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-xl-3 mt-3 mt-md-4 mt-xl-0">
-                                <div class="check-account orange">
-                                    <div class="heading">
-                                        <h4>CREDIT CARD<br class="d-xl-block d-none"> BALANCE</h4>
-                                    </div>
-                                    <div class="text">
-                                        <h3>Total Balance</h3>
-                                        <h4>${{ user?.creditCard | formatPrice }}</h4>
-                                        <p>
-                                            CREDIT CARD LIMIT:
-                                            <span>${{ user?.creditCardLimit | formatPrice }}</span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="transfer">
-                        <div class="row">
-                            <div class="col title">
-                                <h2>Transfer Money</h2>
-                            </div>
-                            <div class="col-md-3 select">
-                                <select [(ngModel)]="transferType" class="money">
-      <option value="">Select Transfer Type</option>
-      <option value="S2C">Savings to Checking</option>
-      <option value="C2S">Checking to Saving </option>
-    </select>
-                            </div>
-                            <div class="col-md-6 amount">
-                                <input type="text" [(ngModel)]="transferAmt" placeholder="Amount">
-                                <button (click)="transfer()" [ngClass]="{'disabled': transferAmt < 1 || transferType.length < 1}" [disabled]="transferAmt < 1 || transferType.length < 1">Transfer</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="table-sec">
-                        <div class="heading">
-                            <h4>CHECKING ACCOUNT</h4>
-                        </div>
-
-                        <div class="table-responsive">
-                            <!--Table-->
-                            <table class="table table-striped">
-                                <!--Table head-->
-                                <thead>
-                                    <tr>
-                                        <th class="th-sm">TRANSACTION</th>
-                                        <th class="th-sm">CHECKPOINT</th>
-                                        <th class="th-sm">COST (-)</th>
-                                        <th class="th-sm">DEPOSIT (+)</th>
-                                        <th class="th-sm">REMOVE</th>
-                                    </tr>
-                                </thead>
-                                <!--Table head-->
-
-                                <!--Table body-->
-                                <tbody>
-                                    <tr *ngFor="let transaction of checkingAccTransactions">
-                                        <th scope="row">
-                                            {{ transaction.title ? transaction.title : transaction.package.title }}
-                                        </th>
-                                        <td>
-                                            {{ transaction?.checkPoint ? transaction?.checkPoint.title : transaction.lifeEvent?.title }}
-                                        </td>
-                                        <td>
-                                            {{ transaction.debitFrom === "CA" ? "-$" : "" }}{{ (transaction.debitFrom === "CA" ? +transaction.cost : "") | formatPrice }}
-                                        </td>
-                                        <td>
-                                            {{ transaction.creditTo === "CA" ? "$" : "" }}{{ (transaction.creditTo === "CA" ? transaction.cost : "") | formatPrice }}
-                                        </td>
-                                        <td>
-                                            <button *ngIf="transaction?.package" class="btn btn-danger" (click)="deleteTransaction(transaction._id)">DELETE</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                                <!--Table body-->
-                            </table>
-                            <!--Table-->
-                        </div>
-                    </div>
-
-                    <div class="table-sec">
-                        <div class="heading">
-                            <h4>SAVINGS ACCOUNT</h4>
-                        </div>
-
-                        <div class="table-responsive">
-                            <!--Table-->
-                            <table class="table table-striped">
-                                <!--Table head-->
-                                <thead>
-                                    <tr>
-                                        <th class="th-sm">TRANSACTION</th>
-                                        <th class="th-sm">CHECKPOINT</th>
-                                        <th class="th-sm">PAYMENT (-)</th>
-                                        <th class="th-sm">DEPOSITS (+)</th>
-                                        <th class="th-sm">REMOVE</th>
-                                    </tr>
-                                </thead>
-                                <!--Table head-->
-
-                                <!--Table body-->
-                                <tbody>
-                                    <tr *ngFor="let transaction of savingAccTransactions">
-                                        <th scope="row">
-                                            {{ transaction.title ? transaction.title : transaction.package.title }}
-                                        </th>
-                                        <td>
-                                            {{ transaction?.checkPoint ? transaction?.checkPoint.title : transaction.lifeEvent?.title }}
-                                        </td>
-                                        <td>
-                                            {{ transaction.debitFrom === "SA" ? "-$" : "" }}{{ (transaction.debitFrom === "SA" ? transaction.cost : "") | formatPrice }}
-                                        </td>
-                                        <td>
-                                            {{ transaction.creditTo === "SA" ? "$" : "" }}{{ (transaction.creditTo === "SA" ? transaction.cost : "") | formatPrice }}
-                                        </td>
-                                        <td><button class="btn btn-danger" (click)="deleteTransaction(transaction._id)">DELETE</button></td>
-                                    </tr>
-                                </tbody>
-                                <!--Table body-->
-                            </table>
-                            <!--Table-->
-                        </div>
-                    </div>
-
-
-                    <div class="table-sec">
-                        <div class="heading">
-                            <h4>RETIREMENT ACCOUNT</h4>
-                        </div>
-
-                        <div class="table-responsive">
-                            <!--Table-->
-                            <table class="table table-striped">
-                                <!--Table head-->
-                                <thead>
-                                    <tr>
-                                        <th class="th-sm">TRANSACTION</th>
-                                        <th class="th-sm">CHECKPOINT</th>
-                                        <th class="th-sm">PAYMENT (-)</th>
-                                        <th class="th-sm">DEPOSITS (+)</th>
-                                        <th class="th-sm">REMOVE</th>
-                                    </tr>
-                                </thead>
-                                <!--Table head-->
-
-                                <!--Table body-->
-                                <tbody>
-                                    <tr *ngFor="let transaction of retirementTransactions">
-                                        <th scope="row">
-                                            {{ transaction.title ? transaction.title : transaction.package.title }}
-                                        </th>
-                                        <td>
-                                            {{ transaction?.checkPoint ? transaction?.checkPoint.title : transaction.lifeEvent?.title }}
-                                        </td>
-                                        <td>
-                                            {{ transaction.debitFrom === "RA" ? "-$" : "" }}{{ (transaction.debitFrom === "RA" ? transaction.cost : "") | formatPrice }}
-                                        </td>
-                                        <td>
-                                            {{ transaction.creditTo === "RA" ? "$" : "" }}{{ (transaction.creditTo === "RA" ? transaction.cost : "") | formatPrice }}
-                                        </td>
-                                        <td><button class="btn btn-danger" (click)="deleteTransaction(transaction._id)">DELETE</button></td>
-                                    </tr>
-                                </tbody>
-                                <!--Table body-->
-                            </table>
-                            <!--Table-->
-                        </div>
-                    </div>
-
-
-                    <div class="table-sec">
-                        <div class="heading">
-                            <h4>CREDIT CARD BALANCE</h4>
-                        </div>
-
-                        <div class="table-responsive">
-                            <!--Table-->
-                            <table class="table table-striped">
-                                <!--Table head-->
-                                <thead>
-                                    <tr>
-                                        <th class="th-sm">TRANSACTION</th>
-                                        <th class="th-sm">CHECKPOINT</th>
-                                        <th class="th-sm">CHARGE (-)</th>
-                                        <th class="th-sm">REMOVE</th>
-                                    </tr>
-                                </thead>
-                                <!--Table head-->
-
-                                <!--Table body-->
-                                <tbody>
-                                    <tr *ngFor="let transaction of ccTransactions">
-                                        <th scope="row">
-                                            {{ transaction.title ? transaction.title : transaction.package.title }}
-                                        </th>
-                                        <td>{{ transaction?.checkPoint?.title }}</td>
-                                        <td>${{ transaction?.cost | formatPrice }}</td>
-                                        <td><button class="btn btn-danger" (click)="deleteTransaction(transaction._id)">DELETE</button></td>
-
-                                    </tr>
-                                </tbody>
-                                <!--Table body-->
-                            </table>
-                            <!--Table-->
                         </div>
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="student-loans">
+                        <div class="heading">
+                            <h4>STUDENT LOANS</h4>
+                        </div>
+                        <div class="text">
+                            <p>
+                                Vist the Education & Training checkpoint to learn your monthly
+                                student loan payment.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="student-loans mt-4">
+                        <div class="heading">
+                            <h4>HEALTH INSURANCE</h4>
+                        </div>
+                        <div class="text">
+                            <p>
+                                Vist the Health & Wellness checkpoint to learn your monthly
+                                health insurance payment.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="account-steps mb-0 mb-md-4">
+                <div class="row">
+                    <div class="col-md-6 col-xl-3">
+                        <div class="check-account">
+                            <div class="heading">
+                                <h4>CHECKING ACCOUNT BALANCE</h4>
+                            </div>
+                            <div class="text">
+                                <h3>REMAINING BALANCE</h3>
+                                <h4>${{ user?.checkingAcc | formatPrice }}</h4>
+                                <p>
+                                    BEGINING BALANCE:
+                                    <span>${{ user?.begCheckingAcc | formatPrice }}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-3 mt-3 mt-md-0">
+                        <div class="check-account yellow">
+                            <div class="heading">
+                                <h4>SAVINGS ACCOUNT BALANCE</h4>
+                            </div>
+                            <div class="text">
+                                <h3>REMAINING BALANCE</h3>
+                                <h4>${{ user?.savingAcc | formatPrice }}</h4>
+                                <p>
+                                    BEGINING BALANCE:
+                                    <span>${{ user?.begSavingAcc | formatPrice }}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-3 mt-3 mt-md-4 mt-xl-0">
+                        <div class="check-account yellow">
+                            <div class="heading">
+                                <h4>RETIREMENT ACCOUNT BALANCE</h4>
+                            </div>
+                            <div class="text">
+                                <h3>CURRENT BALANCE</h3>
+                                <h4>${{ user?.retirementAcc | formatPrice }}</h4>
+                                <p>
+                                    BEGINING BALANCE:
+                                    <span>${{ user?.begRetirementAcc | formatPrice }}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-3 mt-3 mt-md-4 mt-xl-0">
+                        <div class="check-account orange">
+                            <div class="heading">
+                                <h4>CREDIT CARD<br class="d-xl-block d-none"> BALANCE</h4>
+                            </div>
+                            <div class="text">
+                                <h3>Total Balance</h3>
+                                <h4>${{ user?.creditCard | formatPrice }}</h4>
+                                <p>
+                                    CREDIT CARD LIMIT:
+                                    <span>${{ user?.creditCardLimit | formatPrice }}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="transfer">
+                <div class="row">
+                    <div class="col title">
+                        <h2>Transfer Money</h2>
+                    </div>
+                    <div class="col-md-3 select">
+                        <select [(ngModel)]="transferType" class="money">
+                            <option value="">Select Transfer Type</option>
+                            <option value="S2C">Savings to Checking</option>
+                            <option value="C2S">Checking to Saving </option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 amount">
+                        <input type="text" [(ngModel)]="transferAmt" placeholder="Amount">
+                        <button (click)="transfer()"
+                            [ngClass]="{'disabled': transferAmt < 1 || transferType.length < 1}"
+                            [disabled]="transferAmt < 1 || transferType.length < 1">Transfer</button>
+                    </div>
+                </div>
+            </div>
+            
+
+            <!--mobile view tables-->
+            <div class="table-sec">
+                <div class="heading">
+                    <h4>CHECKING ACCOUNT</h4>
+                </div>
+
+                <div class="table-responsive">
+                    <!--Table-->
+                    <table class="table table-striped">
+                        <!--Table head-->
+                        <thead>
+                            <tr>
+                                <th class="th-sm">TRANSACTION</th>
+                                <th class="th-sm">CHECKPOINT</th>
+                                <th class="th-sm">$ (-/+)</th>
+                            </tr>
+                        </thead>
+                        <!--Table head-->
+
+                        <!--Table body-->
+                        <tbody>
+                            <tr *ngFor="let transaction of checkingAccTransactions">
+                                <th scope="row">
+                                    {{ transaction.title ? transaction.title : transaction.package.title }}
+                                </th>
+                                <td>
+                                    {{ transaction?.checkPoint ? transaction?.checkPoint.title :
+                                    transaction.lifeEvent?.title }}
+                                </td>
+                                <td>
+                                    {{ transaction.debitFrom === "CA" ? "-" : (transaction.creditTo === "CA" ? "+" : "") }}{{ (transaction.debitFrom === "CA" || transaction.creditTo === "CA" ?
+                                    +transaction.cost : "") | formatPrice }}
+                                </td>
+                            </tr>
+                        </tbody>
+                        <!--Table body-->
+                    </table>
+                    <!--Table-->
+                </div>
+            </div>
+
+            <div class="table-sec">
+                <div class="heading">
+                    <h4>SAVINGS ACCOUNT</h4>
+                </div>
+
+                <div class="table-responsive">
+                    <!--Table-->
+                    <table class="table table-striped">
+                        <!--Table head-->
+                        <thead>
+                            <tr>
+                                <th class="th-sm">TRANSACTION</th>
+                                <th class="th-sm">CHECKPOINT</th>
+                                <th class="th-sm">$ (+/-)</th>
+                            </tr>
+                        </thead>
+                        <!--Table head-->
+
+                        <!--Table body-->
+                        <tbody>
+                            <tr *ngFor="let transaction of savingAccTransactions">
+                                <th scope="row">
+                                    {{ transaction.title ? transaction.title : transaction.package.title }}
+                                </th>
+                                <td>
+                                    {{ transaction?.checkPoint ? transaction?.checkPoint.title :
+                                    transaction.lifeEvent?.title }}
+                                </td>
+                                <td>
+                                    {{ transaction.debitFrom === "SA" ? "-" : (transaction.creditTo === "SA" ? "+" : "") }}{{ (transaction.debitFrom === "SA" || transaction.creditTo === "SA" ?
+                                    transaction.cost : "") | formatPrice }}
+                                </td>
+                            </tr>
+                        </tbody>
+                        <!--Table body-->
+                    </table>
+                    <!--Table-->
+                </div>
+            </div>
+
+
+            <div class="table-sec">
+                <div class="heading">
+                    <h4>RETIREMENT ACCOUNT</h4>
+                </div>
+
+                <div class="table-responsive">
+                    <!--Table-->
+                    <table class="table table-striped">
+                        <!--Table head-->
+                        <thead>
+                            <tr>
+                                <th class="th-sm">TRANSACTION</th>
+                                <th class="th-sm">CHECKPOINT</th>
+                                <th class="th-sm">$ (+/-)</th>
+                            </tr>
+                        </thead>
+                        <!--Table head-->
+
+                        <!--Table body-->
+                        <tbody>
+                            <tr *ngFor="let transaction of retirementTransactions">
+                                <th scope="row">
+                                    {{ transaction.title ? transaction.title : transaction.package.title }}
+                                </th>
+                                <td>
+                                    {{ transaction?.checkPoint ? transaction?.checkPoint.title :
+                                    transaction.lifeEvent?.title }}
+                                </td>
+                                <td>
+                                    {{ transaction.debitFrom === "RA" ? "-" : (transaction.creditTo === "RA" ? "+" : "") }}{{ (transaction.debitFrom === "RA" || transaction.creditTo === "RA" ?
+                                    transaction.cost : "") | formatPrice }}
+                                </td>
+                        </tbody>
+                        <!--Table body-->
+                    </table>
+                    <!--Table-->
+                </div>
+            </div>
+
+
+            <div class="table-sec">
+                <div class="heading">
+                    <h4>CREDIT CARD BALANCE</h4>
+                </div>
+
+                <div class="table-responsive">
+                    <!--Table-->
+                    <table class="table table-striped">
+                        <!--Table head-->
+                        <thead>
+                            <tr>
+                                <th class="th-sm">TRANSACTION</th>
+                                <th class="th-sm">CHECKPOINT</th>
+                                <th class="th-sm">$ (-)</th>
+                            </tr>
+                        </thead>
+                        <!--Table head-->
+
+                        <!--Table body-->
+                        <tbody>
+                            <tr *ngFor="let transaction of ccTransactions">
+                                <th scope="row">
+                                    {{ transaction.title ? transaction.title : transaction.package.title }}
+                                </th>
+                                <td>{{ transaction?.checkPoint?.title }}</td>
+                                <td>${{ transaction?.cost | formatPrice }}</td>
+                            </tr>
+                        </tbody>
+                        <!--Table body-->
+                    </table>
+                    <!--Table-->
+                </div>
+            </div>
+        </div>
     </section>
-    </div>
+</div>
