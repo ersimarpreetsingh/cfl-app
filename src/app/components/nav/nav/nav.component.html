@@ -1,24 +1,14 @@
 <nav class="navbar navbar-expand-xl navbar-light site-nav">
-  <div class="container-fluid align-items-center">
-    <a class="navbar-brand" routerLink="index">
-      <img src="assets/images/credit-for-Life-logo.png" alt=""
-    /></a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#main-nav"
-      aria-controls="main-nav"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
+    <div class="container-fluid align-items-center">
+        <a class="navbar-brand" routerLink="index">
+            <img src="assets/images/credit-for-Life-logo.png" alt="" /></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="main-nav">
-      <ul class="navbar-nav ml-auto">
-        <li>
-          <a
-            >CHECKING BALANCE
+        <div class="collapse navbar-collapse" id="main-nav">
+            <ul class="navbar-nav ml-auto">
+                <li>
+                    <a>CHECKING BALANCE
             <span>${{ user.checkingAcc | formatPrice }}</span></a
           >
         </li>
@@ -41,26 +31,31 @@
         </li>
         <li class="link-bg" (click)="routeToProfile()">
           <a class="profile">PROFILE</a>
-        </li>
-        <li class="link-bg">
-          <a href="#" class="help">HELP</a>
-        </li>
-      </ul>
+                </li>
+                <li class="link-bg">
+                    <a href="#" class="help">HELP</a>
+                </li>
+            </ul>
+        </div>
     </div>
-  </div>
 </nav>
 <section class="banner">
-  <div class="container">
-    <form class="form" [ngStyle]="{ display: alldone ? 'none' : 'flex' }">
-      <div class="inputGroup" *ngFor="let checkpoint of checkpoints" (click)="routeToCheckpoint($event, checkpoint._id)">
-        <input
-          id="{{ checkpoint._id }}"
-          name="check"
-          type="checkbox"
-          [checked]="checkpoint.completed"
-          (click)="clickCheckbox($event)"
-        />
-        <label for="{{ checkpoint._id }}">
+    <div class="container">
+        <form class="form d-flex" [ngStyle]="{ display: alldone ? 'none' : 'flex' }">
+            <div class="align-items-center d-flex flex-column justify-content-center px-3 view-check w-100">
+                <div class="upper">
+                    <span class="nv-move prev"><i class="fas fa-angle-double-left"></i></span>
+                    <span class="nv-move current">
+                      <!-- Here need to show the selected checkpoint -->
+                    </span>
+                    <span class="nv-move next"><i class="fas fa-angle-double-right"></i></span></div>
+                <div class="view-collapse">
+                    <span class="text">Show All <i class="fas fa-angle-double-down ms-3"></i></span>
+                </div>
+            </div>
+            <div class="inputGroup" *ngFor="let checkpoint of checkpoints" (click)="routeToCheckpoint($event, checkpoint._id)">
+                <input id="{{ checkpoint._id }}" name="check" type="checkbox" [checked]="checkpoint.completed" (click)="clickCheckbox($event)" />
+                <label for="{{ checkpoint._id }}">
           <a>{{
             checkpoint.title
           }}</a></label
